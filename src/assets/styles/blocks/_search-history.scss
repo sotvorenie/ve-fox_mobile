@@ -1,20 +1,13 @@
 @use '../helpers/index' as *;
 
 .search-history {
-  top: calc(100% - #{rem(20)});
-  background: var(--color-dark-alt);
-  padding-block: rem(30) rem(10);
-  border-radius: 0 0 var(--radius-medium) var(--radius-medium);
-  transition: opacity var(--transition-duration), transform var(--transition-duration);
-  opacity: 0;
-  transform: translateY(#{rem(-10)});
-  pointer-events: none;
-
-  &.is-active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+  top: rem(50);
+  left: rem(-10);
+  width: calc(100% + #{rem(20)});
+  height: calc(100vh - #{rem(50)});
+  background: var(--color-dark);
+  padding-bottom: rem(15);
+  overflow-y: auto;
 
   &__item {
     padding: rem(8) rem(15);

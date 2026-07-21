@@ -17,11 +17,13 @@ interface SearchState {
     videos: VideoForList[]
     hasMore: boolean
     history: string[]
+    isOpen: boolean
 
     setValue: (value: string) => void
     search: () => Promise<void>
     addToHistory: (value: string) => void
     setHistory: (value: any) => void
+    setIsOpen: (isOpen: boolean) => void
 }
 
 export const useSearchStore = create<SearchState>((set, get) => ({
@@ -33,6 +35,7 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     videos: [],
     hasMore: false,
     history: [],
+    isOpen: false,
 
     setValue: (value: string) => set({value}),
     search: async (page: number = 1) => {
@@ -78,4 +81,5 @@ export const useSearchStore = create<SearchState>((set, get) => ({
         return { history: newHistory.slice(0, 10) }
     }),
     setHistory: (value: string[]) => set({history: value}),
+    setIsOpen: (value: boolean) => set({isOpen: value})
 }))

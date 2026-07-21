@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {Outlet} from "react-router-dom";
 
 import Header from "@header/Header";
@@ -12,16 +11,14 @@ function MainLayout() {
         return month === 12 || month < 3
     }
 
-    const [headerOptions, setHeaderOptions] = useState({ visibleNavigation: false, isOnlyBack: false });
-
     return (
         <div className="main-layout flex flex-column h-100">
             {isWinter() && <Snowfall/>}
 
-            <Header {...headerOptions}/>
+            <Header/>
 
-            <div className="main-layout__content w-100">
-                <Outlet context={{setHeaderOptions}}/>
+            <div className="main-layout__content w-100 h-100">
+                <Outlet/>
             </div>
 
             <BottomMenu/>

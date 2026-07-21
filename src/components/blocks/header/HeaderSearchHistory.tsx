@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 
 import {apiDeleteFromSearchHistory, apiGetSearchHistory} from "@api/search/search.ts";
 
@@ -8,14 +8,13 @@ import {useUserStore} from "@store/useUserStore.ts";
 import {useSearchStore} from "@store/useSearchStore.ts";
 
 interface Props {
-    inFocus: boolean
     handleSearch: () => void
 }
 
-function HeaderSearchHistory({inFocus, handleSearch}: Readonly<Props>) {
+function HeaderSearchHistory({handleSearch}: Readonly<Props>) {
     const {isLogged} = useUserStore()
 
-    const {history} = useSearchStore()
+    const {history, isOpen} = useSearchStore()
     const {setHistory, setValue} = useSearchStore()
 
     const getHistory = async () => {
@@ -32,7 +31,8 @@ function HeaderSearchHistory({inFocus, handleSearch}: Readonly<Props>) {
         }
     }
 
-    const handleDelete = (item: string) => {
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>, item: string) => {
+        e.stopPropagation()
         const newHistory = history.filter((s) => s !== item)
         setHistory(newHistory)
         if (isLogged) {
@@ -44,7 +44,6 @@ function HeaderSearchHistory({inFocus, handleSearch}: Readonly<Props>) {
 
     const handleSearchFromHistory = (item: string) => {
         setValue(item)
-        console.log(useSearchStore.getState().value)
         handleSearch()
     }
 
@@ -54,8 +53,8 @@ function HeaderSearchHistory({inFocus, handleSearch}: Readonly<Props>) {
 
     return (
         <ul className={`
-                search-history position-absolute w-100
-                ${inFocus && history?.length ? 'is-active' : ''}
+                search-history position-absolute z-10000
+                ${isOpen ? 'is-active' : ''}
             `}
         >
             {history?.map((item) => (
@@ -69,7 +68,7 @@ function HeaderSearchHistory({inFocus, handleSearch}: Readonly<Props>) {
                         className="search-history__delete button-width-svg recolor-svg hover-color-accent radius-50 flex-center"
                         type="button"
                         title="Удалить запрос"
-                        onClick={() => handleDelete(item)}
+                        onClick={(e) => handleDelete(e, item)}
                     >
                         <DeleteIcon/>
                     </button>

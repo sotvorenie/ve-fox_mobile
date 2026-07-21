@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+* {
+  touch-action: manipulation;
+}
+
 /**
   Убираем внутренние отступы слева тегам списков,
   у которых есть атрибут class
