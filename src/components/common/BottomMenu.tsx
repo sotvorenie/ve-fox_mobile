@@ -17,7 +17,8 @@ function BottomMenu() {
         "/",
         "/history",
         "/liked",
-        "/watch_later"
+        "/watch_later",
+        "/user"
     ]
 
     const handleMenuItem = (index: number): void => {
@@ -25,7 +26,7 @@ function BottomMenu() {
     }
 
     return (
-        <div className="main-layout__menu menu z-10000 position-fixed w-100 bottom-0">
+        <div className="menu w-100">
             <ul className="menu__list flex flex-between flex-align-center">
                 {menuItems.map((item: Menu, index: number) => (
                     <li key={item.title} className="menu__item">

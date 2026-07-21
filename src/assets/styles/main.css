@@ -919,7 +919,7 @@ input, textarea {
   grid-column: auto;
 }
 
-.row .row {
+.row .col {
   grid-column: 1/-1;
 }
 
@@ -1045,13 +1045,10 @@ input, textarea {
   transition: opacity var(--transition-duration);
 }
 
-.main-layout__right {
+.main-layout__content {
   overflow-y: auto;
   overflow-x: hidden;
-}
-.main-layout__content {
-  padding: 0 1.25rem 2.5rem;
-  flex-grow: 1;
+  padding-inline: 0.625rem;
 }
 .main-layout .video-list {
   row-gap: 0.9375rem !important;
@@ -1061,7 +1058,10 @@ input, textarea {
   background: var(--color-dark-alt);
 }
 .menu__btn {
-  padding: 0.9375rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  min-height: 3.25rem;
+  min-width: 3.25rem;
   border-radius: var(--radius-regular);
 }
 @media (any-hover: hover) {
@@ -1417,11 +1417,10 @@ input, textarea {
 }
 
 .header {
-  width: 100%;
-  backdrop-filter: blur(52px);
   background: rgba(15, 15, 15, 0.5647058824);
   padding-block: 1.875rem;
   z-index: 1002;
+  height: fit-content;
 }
 .header__btn-bar {
   position: absolute;

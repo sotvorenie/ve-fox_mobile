@@ -4,7 +4,8 @@
   background: var(--color-dark-alt);
 
   &__btn {
-    padding: rem(15);
+    @include square(52);
+
     border-radius: var(--radius-regular);
 
     @include hover {

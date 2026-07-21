@@ -55,7 +55,7 @@ function MainPage() {
                     {videos?.map((video: VideoForList, index: number) => {
                         const isLast = index === videos.length - 2
                         return (<VideoItem key={video.id}
-                                           className="col-4"
+                                           className="col"
                                            video={video}
                                            isRow={false}
                                            ref={isLast ? lastElementRef : null}

@@ -1,11 +1,10 @@
 @use '../../helpers/index' as *;
 
 .header {
-  width: 100%;
-  backdrop-filter: blur(52px);
   background: #0f0f0f90;
   padding-block: rem(30);
   z-index: 1002;
+  height: fit-content;
 
   &__btn-bar {
     @include abs-y;

@@ -11,7 +11,7 @@ interface Props {
 function Header({visibleNavigation = false, isOnlyBack = false}: Readonly<Props>) {
 
     return(
-        <header className={`header flex flex-align-center flex-justify-center top-0 position-sticky ${!visibleNavigation}`}>
+        <header className={`header flex flex-align-center flex-justify-center w-100 ${!visibleNavigation}`}>
             {visibleNavigation && <HeaderNavigation isOnlyBack={isOnlyBack}/>}
 
             <HeaderSearch/>

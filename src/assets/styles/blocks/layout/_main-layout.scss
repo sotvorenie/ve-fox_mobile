@@ -2,14 +2,10 @@
 
 .main-layout {
 
-  &__right {
+  &__content {
     overflow-y: auto;
     overflow-x: hidden;
-  }
-
-  &__content {
-    padding: 0 rem(20) rem(40);
-    flex-grow: 1;
+    padding-inline: rem(10);
   }
 
   .video-list {

@@ -15,18 +15,16 @@ function MainLayout() {
     const [headerOptions, setHeaderOptions] = useState({ visibleNavigation: false, isOnlyBack: false });
 
     return (
-        <div className="main-layout flex h-100">
+        <div className="main-layout flex flex-column h-100">
             {isWinter() && <Snowfall/>}
 
-            <BottomMenu/>
+            <Header {...headerOptions}/>
 
-            <div className="main-layout__right w-100 flex flex-column">
-                <Header {...headerOptions}/>
-
-                <div className="main-layout__content">
-                    <Outlet context={{setHeaderOptions}}/>
-                </div>
+            <div className="main-layout__content w-100">
+                <Outlet context={{setHeaderOptions}}/>
             </div>
+
+            <BottomMenu/>
         </div>
     )
 }
