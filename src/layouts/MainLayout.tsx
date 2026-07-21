@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Outlet} from "react-router-dom";
 
 import Header from "@header/Header";
-import Aside from "@common/Aside.tsx";
+import BottomMenu from "../components/common/BottomMenu.tsx";
 import Snowfall from "@ui/winter/Snowfall.tsx";
 
 function MainLayout() {
@@ -18,7 +18,7 @@ function MainLayout() {
         <div className="main-layout flex h-100">
             {isWinter() && <Snowfall/>}
 
-            <Aside/>
+            <BottomMenu/>
 
             <div className="main-layout__right w-100 flex flex-column">
                 <Header {...headerOptions}/>

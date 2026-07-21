@@ -3,7 +3,7 @@ import {useNavigate, Link} from "react-router-dom";
 
 import useWidthWatcher from "@composables/useWidthWatcher";
 
-import Aside from "@common/Aside.tsx";
+import Aside from "@common/BottomMenu.tsx";
 import Portal from "@common/Portal.tsx";
 
 import ArrowIcon from "@icons/ArrowIcon";

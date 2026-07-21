@@ -16,7 +16,7 @@ interface Props {
     closeFunc?: () => void
 }
 
-function Aside({className, isAbsolute = false, closeFunc = () => {}}: Readonly<Props>) {
+function BottomMenu({className, isAbsolute = false, closeFunc = () => {}}: Readonly<Props>) {
     const navigate = useNavigate();
 
     const {isLogged} = useUserStore()
@@ -75,4 +75,4 @@ function Aside({className, isAbsolute = false, closeFunc = () => {}}: Readonly<P
     )
 }
 
-export default Aside;
+export default BottomMenu;
