@@ -4,6 +4,7 @@ import HomeIcon from "@icons/HomeIcon";
 import HistoryIcon from "@icons/HistoryIcon";
 import LikeIcon from "@icons/LikeIcon";
 import LaterIcon from "@icons/LaterIcon";
+import UserIcon from "@icons/UserIcon";
 
 const menuItems: Menu[] = [
     {
@@ -21,6 +22,10 @@ const menuItems: Menu[] = [
     {
         title: 'Смотреть позже',
         icon: LaterIcon,
+    },
+    {
+        title: 'Пользователь',
+        icon: UserIcon,
     },
 ]
 

@@ -1,22 +1,13 @@
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import {Menu} from "@/types/menu.ts";
 
 import menuItems from "@data/menuLinks.ts";
 
-import Logo from "@icons/Logo.tsx";
-import CrossIcon from "@icons/CrossIcon.tsx";
-
 import {useUserStore} from "@store/useUserStore.ts";
 import {usePagesStore} from "@store/usePagesStore.ts";
 
-interface Props {
-    className?: string
-    isAbsolute?: boolean
-    closeFunc?: () => void
-}
-
-function BottomMenu({className, isAbsolute = false, closeFunc = () => {}}: Readonly<Props>) {
+function BottomMenu() {
     const navigate = useNavigate();
 
     const {isLogged} = useUserStore()
@@ -34,44 +25,25 @@ function BottomMenu({className, isAbsolute = false, closeFunc = () => {}}: Reado
     }
 
     return (
-        <aside className={`main-layout__menu menu h-100 z-1000 ${className}`}>
-            {isAbsolute && (
-                <button className="menu__close button-width-svg recolor-svg hover-color-accent flex-center"
-                        type="button"
-                        onClick={closeFunc}
-                >
-                    <CrossIcon/>
-                    Закрыть
-                </button>
-            )}
-
-            <Link to="/"
-                  className="menu__logo button-width-svg flex flex-align-center"
-                  type="button"
-            >
-                <Logo/>
-                <p className="h4">veFox</p>
-            </Link>
-
-            <ul className="menu__list">
+        <div className="main-layout__menu menu z-10000 position-fixed w-100 bottom-0">
+            <ul className="menu__list flex flex-between flex-align-center">
                 {menuItems.map((item: Menu, index: number) => (
                     <li key={item.title} className="menu__item">
                         <button
                             className={`
-                                    menu__btn w-100 flex flex-align-center recolor-svg hover-color-accent text-nowrap
+                                    menu__btn recolor-svg hover-color-accent flex-center
                                     ${index === page && 'is-active'}
                                     ${!isLogged && index > 0 ? 'pointer-none' : ''}
                                 `}
                             type="button"
                             onClick={() => handleMenuItem(index)}
                         >
-                            <item.icon style={{fill: 'currentColor'}}></item.icon>
-                            <span>{item.title}</span>
+                            <item.icon/>
                         </button>
                     </li>
                 ))}
             </ul>
-        </aside>
+        </div>
     )
 }
 

@@ -1,54 +1,24 @@
 @use '../../helpers/index' as *;
 
 .menu {
-  width: fit-content;
-  padding: rem(40) rem(30);
-  border-right: var(--border-light-alt);
-  background: var(--color-dark);
-
-  &.is-absolute {
-    transition: transform var(--transition-duration);
-
-    &:not(.is-active) {
-      transform: translateX(-100%);
-    }
-  }
-
-  &__close {
-    gap: rem(10);
-    margin-bottom: rem(50);
-
-    svg {
-      @include square(32);
-    }
-  }
-
-  &__logo {
-    margin-bottom: rem(50);
-    column-gap: rem(10);
-
-    svg {
-      width: rem(60);
-    }
-  }
+  background: var(--color-dark-alt);
 
   &__btn {
-    column-gap: rem(10);
-    padding: rem(20) rem(10);
+    padding: rem(15);
     border-radius: var(--radius-regular);
 
     @include hover {
-      background: var(--color-dark-alt);
+      background-color: color-mix(in srgb, var(--color-light-alt), transparent 70%);
     }
 
     &.is-active {
       color: var(--color-accent);
       pointer-events: none;
-      background: var(--color-dark-alt);
+      background-color: color-mix(in srgb, var(--color-light-alt), transparent 70%);
     }
 
     svg {
-      width: rem(30);
+      width: rem(25);
       height: auto;
     }
   }
