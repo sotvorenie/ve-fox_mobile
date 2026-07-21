@@ -21,6 +21,8 @@ function BottomMenu() {
         "/user"
     ]
 
+    const pagesForLogged = new Set([1, 2, 3])
+
     const handleMenuItem = (index: number): void => {
         navigate(pages[index])
     }
@@ -34,7 +36,7 @@ function BottomMenu() {
                             className={`
                                     menu__btn recolor-svg hover-color-accent flex-center
                                     ${index === page && 'is-active'}
-                                    ${!isLogged && index > 0 ? 'pointer-none' : ''}
+                                    ${!isLogged && index > 0 && pagesForLogged.has(index) ? 'is-disabled' : ''}
                                 `}
                             type="button"
                             onClick={() => handleMenuItem(index)}

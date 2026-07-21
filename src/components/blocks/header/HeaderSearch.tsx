@@ -31,6 +31,7 @@ function HeaderSearch() {
     }
 
     const handleSearch = async () => {
+        setIsOpen(false)
         location.pathname === '/search' ? await search() : navigate("/search")
         inputRef.current?.blur()
     }

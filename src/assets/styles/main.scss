@@ -11,12 +11,10 @@
 @use 'blocks/layout/main-layout';
 @use 'blocks/layout/menu';
 @use 'blocks/skeleton';
-@use 'blocks/total';
 @use 'blocks/toggle-button';
 @use 'blocks/loading';
 @use 'blocks/modal';
 @use 'blocks/close-btn';
-@use 'blocks/margin-center-page';
 @use 'blocks/crop';
 
 @use 'blocks/auth/auth';
@@ -29,6 +27,7 @@
 @use 'blocks/channel/channel';
 
 @use 'blocks/video/video-item';
+@use 'blocks/video/video-list';
 @use 'blocks/video/video-menu';
 @use 'blocks/video/video-page';
 @use 'blocks/video/video';

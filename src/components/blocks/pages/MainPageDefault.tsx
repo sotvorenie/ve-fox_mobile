@@ -10,7 +10,7 @@ import {apiGetListWatchLater} from "@api/watch_later/watchLater";
 import {videoListObserver} from "@composables/useVideoListObserver.ts";
 
 import VideoItem from "@video/VideoItem";
-import ListColumnSkeleton from "@ui/skeletons/ListColumnSkeleton";
+import ListSkeleton from "@ui/skeletons/ListSkeleton.tsx";
 
 import {usePagesStore} from "@store/usePagesStore";
 
@@ -113,7 +113,7 @@ function MainPageDefault({name, index}: Props) {
                 </ul>
             )}
 
-            {isLoading && <ListColumnSkeleton isRecommended={false}/>}
+            {isLoading && <ListSkeleton isRecommended={false}/>}
         </div>
     )
 }

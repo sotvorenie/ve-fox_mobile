@@ -37,10 +37,10 @@ function Preview({video, isRecommendation}: Readonly<PreviewProps>) {
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
 
     return (
-        <div className="video-item__preview img-container position-relative">
+        <div className="video-item__preview img-container position-relative mb-10">
             <img src={`${BASE_URL}${video.preview_url}`} alt={video.name} loading="lazy"/>
 
-            <span className="position-absolute">{formatVideoTime(video.duration)}</span>
+            <span className="position-absolute z-1001">{formatVideoTime(video.duration)}</span>
 
             <VideoMenu id={video.id} isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} isSmall={isRecommendation}/>
 
@@ -101,11 +101,11 @@ const VideoItem = forwardRef(({
                     {showAvatar && <Avatar video={video} handleChannel={handleChannel}/>}
 
                     <div className="video-item__text flex flex-column">
-                        <span className="video-item__title two-lines">
+                        <span className="video-item__title two-lines mb-5">
                             {formatVideoName(video.name)}
                         </span>
 
-                        <div className="flex gap-10 flex-align-center text-ellipsis">
+                        <div className="flex flex-align-center flex-wrap gap-8 line-height-1">
                             {!isChannel && (
                                 <>
                                         <span className="video-item__info-item">

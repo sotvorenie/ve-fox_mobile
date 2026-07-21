@@ -7,7 +7,7 @@ import {apiGetAllVideos} from "@api/video/video";
 import {videoListObserver} from "@composables/useVideoListObserver.ts";
 
 import VideoItem from "@video/VideoItem";
-import ListRowSkeleton from "@ui/skeletons/ListRowSkeleton";
+import ListSkeleton from "@ui/skeletons/ListSkeleton.tsx";
 import MainEmpty from "@ui/empty/mainEmpty";
 
 import {usePagesStore} from "@store/usePagesStore";
@@ -49,9 +49,9 @@ function MainPage() {
     }, [])
 
     return (
-        <div className="main-page__home h-100">
+        <>
             {!isLoading && (
-                <ul className="video-list row">
+                <ul className="video-list">
                     {videos?.map((video: VideoForList, index: number) => {
                         const isLast = index === videos.length - 2
                         return (<VideoItem key={video.id}
@@ -65,8 +65,8 @@ function MainPage() {
 
             {!isLoading && !videos?.length && <MainEmpty/>}
 
-            {isLoading && <ListRowSkeleton/>}
-        </div>
+            {isLoading && <ListSkeleton/>}
+        </>
     )
 }
 

@@ -1,10 +1,13 @@
 @use '../../helpers/index' as *;
 
 .video-item {
-  cursor: pointer;
-  padding: rem(8);
   transition: background-color var(--transition-duration);
   border-radius: var(--radius-medium);
+  padding-bottom: rem(10);
+
+  @include hover() {
+    background-color: color-mix(in srgb, var(--color-accent), transparent 30%);
+  }
 
   &.is-recommended {
 
@@ -26,19 +29,16 @@
   &__preview {
     border-radius: var(--radius-medium);
     aspect-ratio: 16 / 9;
-    margin-bottom: rem(10);
     background: var(--color-dark-alt);
     color: var(--color-light) !important;
 
     span {
-      font-size: rem(16);
-      z-index: 1001;
-      bottom: 5px;
-      right: rem(8);
+      bottom: rem(5);
+      right: rem(5);
       background: var(--color-accent);
       border-radius: var(--radius-regular);
       padding-inline: rem(5);
-      text-shadow: 0 0 rem(5) var(--color-dark);
+      text-shadow: 0 0 rem(2) var(--color-dark);
       border: var(--border-dark-alt);
     }
 
@@ -47,17 +47,16 @@
     }
   }
 
-  &__info {
-    column-gap: rem(15);
-    row-gap: rem(10);
+  &__title {
+    color: var(--color-light);
   }
 
-  &__title {
-    color: var(--color-light) !important;
+  &__info {
+    column-gap: rem(10);
   }
 
   &__avatar {
-    @include square(50);
+    @include square(40);
 
     padding: 0;
     background: var(--color-light-alt);
@@ -65,13 +64,13 @@
   }
 
   &__info-item {
-    font-size: rem(14);
+    font-size: rem(13);
     color: var(--color-light-alt);
     opacity: .9;
   }
 
   &__dot {
-    @include square(4);
+    @include square(3);
 
     border-radius: 50%;
     background: var(--color-light-alt);

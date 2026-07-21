@@ -2,7 +2,7 @@ import {VideoForList} from "@/types/video";
 
 import {videoListObserver} from "@composables/useVideoListObserver.ts";
 
-import ListColumnSkeleton from "@ui/skeletons/ListColumnSkeleton";
+import ListSkeleton from "@ui/skeletons/ListSkeleton.tsx";
 import VideoItem from "@video/VideoItem.tsx";
 
 import {useVideoStore} from "@store/useVideoStore";
@@ -43,7 +43,7 @@ function VideoRecommended({id}: Readonly<Props>) {
                 })}
             </ul>
 
-            {isLoading && <ListColumnSkeleton isRecommended={true}/>}
+            {isLoading && <ListSkeleton isRecommended={true}/>}
         </div>
     )
 }

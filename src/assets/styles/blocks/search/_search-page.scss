@@ -6,14 +6,7 @@
     gap: rem(25);
   }
 
-  &__channel {
-
-    a {
-      gap: rem(20);
-    }
-
-    &-avatar {
-      @include square(128);
-    }
+  &__channel-avatar {
+    @include square(50);
   }
 }

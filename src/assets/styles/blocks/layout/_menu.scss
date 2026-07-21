@@ -1,10 +1,12 @@
 @use '../../helpers/index' as *;
 
 .menu {
-  background: var(--color-dark-alt);
+  padding: rem(5) rem(15);
+  background: var(--color-dark);
+  border-top: var(--border-dark-alt);
 
   &__btn {
-    @include square(52);
+    @include square(48);
 
     border-radius: var(--radius-regular);
 
@@ -16,6 +18,11 @@
       color: var(--color-accent);
       pointer-events: none;
       background-color: color-mix(in srgb, var(--color-light-alt), transparent 70%);
+    }
+
+    &.is-disabled {
+      pointer-events: none;
+      opacity: .4;
     }
 
     svg {
