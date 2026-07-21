@@ -57,7 +57,6 @@ function MainPage() {
                         return (<VideoItem key={video.id}
                                            className="col"
                                            video={video}
-                                           isRow={false}
                                            ref={isLast ? lastElementRef : null}
                         />)
                     })}
