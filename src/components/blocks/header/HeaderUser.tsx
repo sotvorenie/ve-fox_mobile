@@ -1,5 +1,4 @@
 import {ComponentType, SVGProps, useState, useEffect, MouseEvent} from "react";
-import { emit } from '@tauri-apps/api/event';
 
 import {BASE_URL} from "@api/url";
 
@@ -71,7 +70,6 @@ function HeaderUser() {
 
     const handleCloseApp = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
-        emit('request-close').then()
     }
 
     useEffect(() => {

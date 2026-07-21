@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "sass-watch": "sass --watch .",
+    "vite": "vite",
+    "dev": "concurrently \"npm run sass-watch\" \"npm run vite\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -13,7 +15,9 @@
     "@capacitor/android": "^8.4.2",
     "@capacitor/cli": "^7.6.8",
     "@capacitor/core": "^8.4.2",
+    "@capacitor/dialog": "^8.0.1",
     "axios": "^1.18.1",
+    "concurrently": "^9.2.4",
     "framer-motion": "^12.42.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
@@ -32,6 +36,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
     "globals": "^17.7.0",
+    "sass": "^1.101.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.62.0",
     "vite": "^8.1.1"
