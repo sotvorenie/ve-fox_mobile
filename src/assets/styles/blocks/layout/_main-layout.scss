@@ -6,5 +6,9 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: rem(10);
+
+    &.is-video-page {
+      padding-top: 0;
+    }
   }
 }

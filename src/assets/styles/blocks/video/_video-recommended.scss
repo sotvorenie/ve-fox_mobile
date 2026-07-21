@@ -1,0 +1,61 @@
+@use '../../helpers/index' as *;
+
+.video-recommended {
+
+  &__open, &__close span {
+    --btn-bg-alpha: 2%;
+
+    background-color: color-mix(in srgb, var(--color-dark-alt), transparent var(--btn-bg-alpha));
+
+    @include hover() {
+      --btn-bg-alpha: 30%;
+    }
+  }
+
+  &__open {
+    @include square(42);
+    @include abs-x;
+
+    bottom: rem(90);
+
+    svg {
+      width: 65%;
+    }
+  }
+
+  &__content {
+    background: var(--color-dark);
+    border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+    padding: rem(30) rem(10) rem(20);
+    transition: transform var(--transition-duration);
+
+    &:not(.is-open) {
+      transform: translateY(105%);
+    }
+  }
+
+  &__close {
+    @include square(42);
+    @include abs-x;
+
+    background: var(--color-dark);
+    top: rem(-15);
+    rotate: 180deg;
+
+    span {
+      --width: #{rem(8)};
+
+      width: calc(100% - var(--width));
+      height: calc(100% - var(--width));
+    }
+  }
+
+  &__list {
+    height: rem(500);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

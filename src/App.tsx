@@ -111,8 +111,8 @@ function App() {
                 <Route path="/liked" element={<LikedPage/>}/>
                 <Route path="/watch_later" element={<WatchLaterPage/>}/>
                 <Route path="/user" element={<UserPage/>}/>
+                <Route path="/video/:id" element={<VideoPage />}/>
             </Route>
-          <Route path="/video/:id" element={<VideoPage />}/>
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

@@ -1,0 +1,18 @@
+@use '../../helpers/index' as *;
+
+.video-settings {
+  background: #3d4b56;
+  width: fit-content;
+  padding: rem(12);
+  border-radius: var(--radius-medium);
+  top: rem(50);
+  right: rem(15);
+
+  &:not(.is-active) {
+    pointer-events: none;
+  }
+
+  &__label {
+    gap: rem(10);
+  }
+}

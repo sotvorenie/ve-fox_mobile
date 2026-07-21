@@ -48,7 +48,7 @@ function Comments() {
 
     return (
         <div className="comments">
-            <div className="comments__head flex flex-align-center mb-30">
+            <div className="comments__head flex flex-align-center flex-between mb-20">
                 <span className="comments__number h6">{total} {formatCount(total, commentsArr)}</span>
 
                 <CommentsSort isPopular={isPopular} setIsPopular={setIsPopular}/>

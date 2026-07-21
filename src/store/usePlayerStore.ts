@@ -2,8 +2,6 @@ import {create} from "zustand";
 
 interface PlayerState {
     isPlaying: boolean
-    volume: number
-    oldVolume: number
     isShowSettings: boolean
     isShowControls: boolean
     duration: number
@@ -14,8 +12,6 @@ interface PlayerState {
 
     setIsPlaying: (value: boolean) => void
     toggleIsPlaying: () => void
-    setVolume: (volume: number) => void
-    setOldVolume: (volume: number) => void
     setDuration: (duration: number) => void
     setCurrentTime: (currentTime: number) => void
     setIsShowSettings: (value: boolean) => void
@@ -30,8 +26,6 @@ interface PlayerState {
 
 export const usePlayerStore = create<PlayerState>((set) => ({
     isPlaying: false,
-    volume: 1,
-    oldVolume: 1,
     isShowSettings: false,
     isShowControls: true,
     duration: 0,
@@ -42,8 +36,6 @@ export const usePlayerStore = create<PlayerState>((set) => ({
 
     setIsPlaying: (value: boolean) => set({isPlaying: value}),
     toggleIsPlaying: () => set((state) => ({isPlaying: !state.isPlaying})),
-    setVolume: (volume: number) => set({volume: volume}),
-    setOldVolume: (volume: number) => set({oldVolume: volume}),
     setDuration: (duration: number) => set({duration: duration}),
     setCurrentTime: (currentTime: number) => set({currentTime: currentTime}),
     setIsShowSettings: (value: boolean) => set({isShowSettings: value}),

@@ -28,23 +28,21 @@ function VideoRecommended({id}: Readonly<Props>) {
     const lastElementRef = videoListObserver(() => getRecommendedVideos(+id), hasMore, isLoading)
 
     return (
-        <div className="video-page__recommended w-100 h-100">
-            <ul className="video-page__recommended_list">
+        <>
+            <ul className="video-list">
                 {videos?.map((video: VideoForList, index: number) => {
                     if (activeVideo.id === video.id) return
                     const isLast = index === videos.length - 2
                     return <VideoItem key={video.id}
                                       video={video}
-                                      isRow={true}
                                       showAvatar={false}
-                                      isSmall isRecommendation
                                       ref={isLast ? lastElementRef : null}
                     />
                 })}
             </ul>
 
-            {isLoading && <ListSkeleton isRecommended={true}/>}
-        </div>
+            {isLoading && <ListSkeleton/>}
+        </>
     )
 }
 

@@ -34,7 +34,7 @@ function CommentsSort({isPopular, setIsPopular}: Readonly<Props>) {
                     onClick={() => setSortIsOpen(prev => !prev)}
             >
                 <SortIcon/>
-                <span className="text-w500">Упорядочить</span>
+                <span className="text-w600">Упорядочить</span>
             </button>
 
             <div className={`

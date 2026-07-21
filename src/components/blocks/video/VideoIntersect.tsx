@@ -97,7 +97,7 @@ function VideoIntersect({savedTime}: Readonly<Props>) {
     }, [isMiniPlayer, isFullscreen])
 
     return (
-        <div className={`video__intersect w-100 ${isMiniPlayer ? 'mini-player' : ''}`} ref={intersectRef}>
+        <div className={`video__intersect mb-10 ${isMiniPlayer ? 'mini-player' : ''}`} ref={intersectRef}>
             <div className="video__intersect_wrapper z-1001"
                  onMouseDown={handleTouchStart}
                  style={{

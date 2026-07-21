@@ -6,11 +6,11 @@ import {apiDeleteSavedTime, apiSaveTime} from "@api/save_time/saveTime";
 
 import VideoPlayerSettings from "@video/video-player/VideoPlayerSettings.tsx";
 import VideoPlayerControls, {ControlsHandles} from "@video/video-player/VideoPlayerControls.tsx";
+import VideoPlayerRecommended from "@video/video-player/VideoPlayerRecommended.tsx";
 
 import {useVideoStore} from "@store/useVideoStore";
 import {usePlayerStore} from "@store/usePlayerStore";
 import {useUserStore} from "@store/useUserStore";
-import VideoPlayerRecommended from "@video/video-player/VideoPlayerRecommended.tsx";
 
 interface Props {
     savedTime: number
@@ -21,7 +21,6 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
 
     const {
         isPlaying,
-        volume,
         isShowSettings,
         isShowControls,
         isFullscreen,
@@ -35,8 +34,6 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
         setCurrentTime,
         setIsShowControls,
         setIsShowSettings,
-        setIsFullscreen,
-        toggleIsFullscreen,
         clearData
     } = usePlayerStore();
     const {isLogged} = useUserStore();
@@ -73,56 +70,16 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
     }
 
     // перемещение timeline
-    const updateVideoTime = (e: MouseEvent | React.MouseEvent) => {
+    const updateVideoTime = (e: TouchEvent) => {
         if (!controlsRef.current?.timeline || !videoRef.current) return
 
         const rect = controlsRef.current.timeline.getBoundingClientRect()
-        let percent: number = (e.clientX - rect.left) / rect.width
+        const clientX = e.touches[0].clientX
+        let percent: number = (clientX - rect.left) / rect.width
         percent = Math.min(Math.max(percent, 0), 1)
         setProgress(percent * 100)
         videoRef.current.currentTime = percent * duration
     }
-
-    // показ/скрытие контроллеров
-    const hideControllers = () => {
-        if (!isPlaying || isShowSettings) return
-
-        setIsShowControls(false)
-    }
-    const showControllers = () => {
-        if (!isPlaying) return
-
-        setIsShowControls(true)
-    }
-
-    useEffect(() => {
-        if (!videoRef.current) return
-        videoRef.current.volume = volume
-
-        const handleKeys = (e: KeyboardEvent) => {
-            if (e.code === 'Space' && !(document.activeElement instanceof HTMLInputElement)) {
-                e.preventDefault()
-                toggleIsPlaying()
-            } else if (e.key === 'f' && !(document.activeElement instanceof HTMLInputElement)) {
-                toggleIsFullscreen()
-            } else if (e.code === 'Escape') {
-                setIsRecommendedOpen(prev => {
-                    if (prev) {
-                        return false
-                    } else {
-                        setIsFullscreen(false)
-                        return false
-                    }
-                })
-            }
-        }
-
-        document.addEventListener('keydown', handleKeys)
-
-        return () => {
-            document.removeEventListener('keydown', handleKeys)
-        }
-    }, [])
 
     useEffect(() => {
         clearData()
@@ -193,7 +150,7 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
                 setIsShowControls(false)
             }, 2000)
 
-            sectionRef.current?.addEventListener('mousemove', moveCursor)
+            sectionRef.current?.addEventListener('click', moveCursor)
         } else {
             setIsShowControls(true)
         }
@@ -203,18 +160,18 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
                 clearTimeout(hideControlsTimer.current)
                 clearTimeout(cursorTimer.current)
             }
-            sectionRef.current?.removeEventListener('mousemove', moveCursor)
+            sectionRef.current?.removeEventListener('click', moveCursor)
         }
     }, [isPlaying, isShowSettings, isFullscreen, video.id])
 
     useEffect(() => {
-        const mouseMove = (e: MouseEvent) => {
+        const touchMove = (e: TouchEvent) => {
             if (!videoRef.current || !controlsRef.current?.timeline) return
             if (!isMoving) return
 
             updateVideoTime(e)
         }
-        const mouseUp = () => {
+        const touchEnd = () => {
             if (!videoRef.current || !controlsRef.current?.timeline) return
 
             setIsMoving(false)
@@ -222,13 +179,13 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
         }
 
         if (isMoving) {
-            globalThis.addEventListener('mousemove', mouseMove)
-            globalThis.addEventListener('mouseup', mouseUp)
+            globalThis.addEventListener('touchmove', touchMove)
+            globalThis.addEventListener('touchend', touchEnd)
         }
 
         return () => {
-            globalThis.removeEventListener('mousemove', mouseMove)
-            globalThis.removeEventListener('mouseup', mouseUp)
+            globalThis.removeEventListener('touchmove', touchMove)
+            globalThis.removeEventListener('touchend', touchEnd)
         }
     }, [isMoving])
 
@@ -252,12 +209,6 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
     }, [isShowSettings])
 
     useEffect(() => {
-        if (!videoRef.current) return
-
-        videoRef.current.volume = volume
-    }, [volume])
-
-    useEffect(() => {
         isPlayingRef.current = isPlaying
     }, [isPlaying])
 
@@ -269,14 +220,12 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
 
     return (
         <section className={
-                    `video-player position-relative overflow-hidden w-100 
+                    `video-player position-relative
                     ${isFullscreen ? 'is-fullscreen' : ''}
                     ${isShowControls ? '' : 'controls-hidden'}`
                  }
                  ref={sectionRef}
                  aria-label="Видео-плеер"
-                 onMouseLeave={hideControllers}
-                 onMouseEnter={showControllers}
         >
             {!isMiniPlayer && (
                 <button className="video-player__hidden position-absolute inset-0 z-100 cursor-pointer"
@@ -304,7 +253,7 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
                 )}
             </video>
 
-            {!isMiniPlayer && <VideoPlayerSettings isShowSettings={isShowSettings}/>}
+            {!isMiniPlayer && <VideoPlayerSettings isVisible={isShowSettings}/>}
 
             <VideoPlayerControls setIsShowSettings={setIsShowSettings}
                                  progress={progress}

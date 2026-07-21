@@ -26,12 +26,13 @@
 
 @use 'blocks/channel/channel';
 
-@use 'blocks/video/video-item';
 @use 'blocks/video/video-list';
+@use 'blocks/video/video-item';
 @use 'blocks/video/video-menu';
-@use 'blocks/video/video-page';
 @use 'blocks/video/video';
 @use 'blocks/video/video-player';
+@use 'blocks/video/video-settings';
+@use 'blocks/video/video-recommended';
 @use 'blocks/video/comments';
 @use 'blocks/video/comment';
 

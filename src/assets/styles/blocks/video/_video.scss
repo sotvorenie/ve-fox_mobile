@@ -1,20 +1,13 @@
 @use '../../helpers/index' as *;
 
 .video {
-  min-width: 70%;
-  max-width: 70%;
-
-  &__actions {
-    justify-content: space-between;
-  }
-
-  &__title {
-    margin-top: rem(15);
-    font-size: rem(24);
-  }
 
   &__channel {
-    column-gap: rem(10);
+    width: 100vw;
+    margin-left: rem(-10);
+    border-block: var(--border-dark-alt);
+    border-color: var(--color-dark-alt) !important;
+    padding: rem(10);
 
     @include hover {
       .video__channel-avatar {
@@ -23,25 +16,17 @@
     }
 
     &-avatar {
-      @include square(50);
+      @include square(40);
       @include flex-center();
 
       background: var(--color-dark-alt);
       border-radius: 50%;
     }
-
-    &-name {
-      font-size: rem(20);
-    }
-  }
-
-  &__buttons {
-    column-gap: rem(20);
   }
 
   &__button {
     background: var(--color-dark-alt);
-    padding: rem(8) rem(25);
+    padding: rem(10) rem(15);
     border-radius: var(--radius-big);
     line-height: 1;
 
@@ -54,9 +39,7 @@
     }
 
     svg {
-      @include square(30);
-
-      fill: currentColor;
+      @include square(20);
     }
   }
 
@@ -64,13 +47,9 @@
     margin-top: rem(4);
   }
 
-  &__info {
-    background: var(--color-dark-alt);
-    padding: rem(15) rem(30);
-    border-radius: var(--radius-medium);
-  }
-
   &__intersect {
+    width: 100vw;
+    margin-left: rem(-10);
     aspect-ratio: 16/9;
 
     &:has(.is-fullscreen) {
