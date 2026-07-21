@@ -18,13 +18,13 @@
 @use 'blocks/close-btn';
 @use 'blocks/margin-center-page';
 @use 'blocks/crop';
-@use 'blocks/search-history';
 
 @use 'blocks/auth/auth';
 
 @use 'blocks/header/header';
 @use 'blocks/header/settings';
 @use 'blocks/header/redact-user';
+@use 'blocks/header/search-history';
 
 @use 'blocks/channel/channel';
 

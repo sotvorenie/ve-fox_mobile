@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+import {BASE_URL} from "@api/url.ts";
+
 import {useUserStore} from "@store/useUserStore.ts";
 
 const client = axios.create({
-    baseURL: 'http://localhost:5557',
+    baseURL: BASE_URL,
     timeout: 10000,
 })
 

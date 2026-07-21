@@ -1,4 +1,4 @@
-@use '../helpers/index' as *;
+@use '../../helpers/index' as *;
 
 .search-history {
   top: rem(50);
@@ -10,7 +10,7 @@
   overflow-y: auto;
 
   &__item {
-    padding: rem(8) rem(15);
+    padding: rem(8) rem(20);
     justify-content: space-between;
 
     @include hover() {

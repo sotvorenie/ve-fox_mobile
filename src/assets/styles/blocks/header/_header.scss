@@ -70,7 +70,10 @@
       }
 
       svg {
-        @include square(15);
+        @include square(18);
+
+        margin-bottom: rem(3);
+        margin-right: rem(3);
       }
     }
   }
