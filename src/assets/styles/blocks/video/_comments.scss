@@ -1,0 +1,71 @@
+@use '../../helpers/index' as *;
+
+.comments {
+  padding-bottom: rem(20);
+
+  .button {
+    padding: rem(10);
+  }
+
+  &__head {
+    gap: rem(40);
+  }
+
+  &__sort {
+
+    &-open {
+      font-size: rem(16);
+      align-items: end;
+
+      svg {
+        @include square(32);
+      }
+    }
+
+    &-block {
+      top: calc(100% + #{rem(10)});
+      background: var(--color-dark-alt);
+      border-radius: var(--radius-regular);
+      padding: rem(10);
+
+      &:not(.is-active) {
+        pointer-events: none;
+      }
+    }
+
+    &-btn {
+      padding: rem(15) rem(25);
+      border-radius: var(--radius-regular);
+
+      &.is-active {
+        background-color: color-mix(in srgb, var(--color-light-alt), transparent 70%);
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__avatar {
+    @include square(42);
+  }
+
+  &__form {
+    margin-top: rem(-15);
+  }
+
+  &__btn-bar {
+    width: 0;
+    opacity: 0;
+    transition:
+            width var(--transition-duration),
+            opacity var(--transition-duration),
+            font-size var(--transition-duration);
+    transform-origin: center left;
+    font-size: 0;
+
+    &.is-active {
+      width: rem(400);
+      opacity: 1;
+      font-size: rem(16);
+    }
+  }
+}

@@ -1,0 +1,111 @@
+@use '../../helpers/index' as *;
+
+.header {
+  width: 100%;
+  backdrop-filter: blur(52px);
+  background: #0f0f0f90;
+  padding-block: rem(30);
+  z-index: 1002;
+
+  &__btn-bar {
+    @include abs-y;
+
+    column-gap: rem(30);
+    left: rem(20);
+  }
+
+  &__logo {
+    @include square(80);
+  }
+
+  &__back, &__forward {
+    column-gap: rem(10);
+
+    svg {
+      @include square(40);
+    }
+
+    span {
+      @include laptop {
+        display: none;
+      }
+    }
+  }
+
+  &__forward {
+    flex-direction: row-reverse;
+
+    svg {
+      rotate: 180deg;
+    }
+  }
+
+  &__avatar {
+    top: rem(40);
+    right: rem(40);
+    aspect-ratio: 1;
+    width: rem(50);
+    z-index: 10001;
+    background-color: var(--color-dark-alt);
+    transition:
+            width var(--transition-duration),
+            top var(--transition-duration);
+
+    &.is-active {
+      width: rem(120);
+    }
+
+    svg {
+      width: 60%;
+    }
+  }
+
+  &__search {
+    width: rem(800);
+    height: rem(50);
+
+    &_wrapper {
+      border-radius: var(--radius-big);
+      border: var(--border-light-alt);
+      background: var(--color-dark);
+
+      & * {
+        height: 100%;
+      }
+    }
+  }
+
+  &__input {
+    border: none;
+    padding-inline: rem(20) rem(70);
+    flex-grow: 1;
+  }
+
+  &__btn {
+    width: rem(65);
+    background: var(--color-dark-alt);
+    will-change: filter;
+
+    @include hover {
+      filter: brightness(1.1);
+    }
+
+    svg {
+      width: 40%;
+    }
+  }
+
+  &__clear {
+    @include abs-y;
+    @include square(40);
+
+    aspect-ratio: 1;
+    height: 100%;
+    right: rem(70);
+    z-index: 1000;
+  }
+
+  &__burger-btn {
+    @include square(52);
+  }
+}

@@ -1,0 +1,78 @@
+@use '../helpers' as *;
+
+.input {
+  display: block;
+
+  &.has-cross {
+
+    .input__inp {
+      padding-right: rem(55);
+    }
+  }
+  &.is-transparent {
+
+    .input__inp {
+      border-bottom: 1px solid var(--color-dark-alt);
+      transition:
+              padding-block var(--transition-duration),
+              border-color var(--transition-duration);
+
+      &:focus {
+        padding-block: rem(5);
+        border-color: var(--color-light);
+      }
+    }
+  }
+
+  &:not(.is-transparent) {
+
+    .input__inp {
+      background: var(--color-dark-alt);
+      border-radius: var(--radius-regular);
+      border: 1px solid currentColor;
+      padding: rem(15);
+    }
+  }
+
+  &__inp {
+    border: none;
+
+    &:focus {
+      border-color: var(--color-accent);
+    }
+
+    @include hover {
+      border-color: var(--color-accent);
+    }
+  }
+
+  &__text {
+    font-size: .9em;
+    background: var(--color-dark-alt);
+    padding-inline: rem(5);
+    line-height: 1;
+  }
+
+  &__name {
+    top: rem(-8);
+    left: rem(10);
+  }
+
+  &__counter {
+    bottom: rem(-8);
+    right: rem(10);
+  }
+
+  &__error {
+    top: calc(100% + #{rem(5)});
+    left: rem(5);
+    color: var(--color-accent);
+  }
+
+  &__clear {
+    @include abs-y;
+    @include square(32);
+
+    right: rem(10);
+  }
+}

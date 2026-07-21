@@ -1,0 +1,141 @@
+@use '../../helpers/index' as *;
+
+.video-item {
+  cursor: pointer;
+  padding: rem(8);
+  transition: background-color var(--transition-duration);
+  border-radius: var(--radius-medium);
+
+  @include hover {
+
+    &.hover-opacity {
+      background: #fe797180;
+    }
+    &:not(.hover-opacity) {
+      background: var(--color-accent);
+
+      .video-item__info * {
+        color: var(--color-light);
+      }
+    }
+
+    .video-item__preview {
+      border-radius: 0;
+    }
+  }
+
+  &.is-small {
+
+    .video-item__title {
+      font-size: rem(16);
+    }
+  }
+
+  &.is-recommended {
+
+    .video-item__info {
+      row-gap: 0;
+    }
+    .video-item__info-item {
+      font-size: rem(13);
+    }
+    .video-item__channel {
+      display: inline-block;
+      margin-bottom: rem(6);
+    }
+    .video-item__timeline {
+      height: rem(4);
+    }
+  }
+
+  &__preview {
+    border-radius: var(--radius-medium);
+    aspect-ratio: 16 / 9;
+    margin-bottom: rem(10);
+    background: var(--color-dark-alt);
+    color: var(--color-light) !important;
+
+    span {
+      font-size: rem(16);
+      z-index: 1001;
+      bottom: 5px;
+      right: rem(8);
+      background: var(--color-accent);
+      border-radius: var(--radius-regular);
+      padding-inline: rem(5);
+      text-shadow: 0 0 rem(5) var(--color-dark);
+      border: var(--border-dark-alt);
+    }
+
+    img, video {
+      object-fit: contain;
+    }
+    img {
+      transition: opacity .3s;
+
+      &.is-hidden {
+        opacity: 0;
+      }
+    }
+    video {
+      transition: opacity var(--transition-duration) ease;
+      opacity: 0;
+
+      &.z-10 {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__info {
+    column-gap: rem(15);
+    row-gap: rem(10);
+  }
+
+  &__title {
+    color: var(--color-light) !important;
+  }
+
+  &__avatar {
+    @include square(50);
+
+    padding: 0;
+    background: var(--color-light-alt);
+    color: var(--color-dark-alt);
+  }
+
+  &__info-item {
+    font-size: rem(14);
+    color: var(--color-light-alt);
+    opacity: .9;
+  }
+
+  &__row {
+
+    &-item {
+      column-gap: rem(10);
+      width: 100%;
+
+      .video-item__preview {
+        flex: 0 0 50%;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__dot {
+    @include square(4);
+
+    border-radius: 50%;
+    background: var(--color-light-alt);
+  }
+
+  &__timeline {
+    height: rem(5);
+    background: var(--color-light-alt);
+
+    div {
+      background: var(--color-accent);
+    }
+  }
+}

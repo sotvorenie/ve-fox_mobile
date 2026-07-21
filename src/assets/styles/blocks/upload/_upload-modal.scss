@@ -1,0 +1,28 @@
+@use '../../helpers/index' as *;
+
+.upload-modal {
+
+  &__input {
+    padding-block: rem(10);
+  }
+
+  &__list {
+    gap: rem(10);
+  }
+
+  &__btn {
+    border: var(--border-light-alt);
+    border-radius: var(--radius-medium);
+    padding: rem(10);
+    gap: rem(20);
+
+    &.is-active {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+  }
+
+  &__img-container {
+    width: rem(40);
+  }
+}

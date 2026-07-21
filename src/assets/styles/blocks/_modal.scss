@@ -1,0 +1,15 @@
+@use '../helpers/index' as *;
+
+.modal {
+  inset: 0;
+  backdrop-filter: blur(3px) brightness(0.75);
+  z-index: 10001;
+
+  &__content {
+    background: var(--color-dark-alt);
+    padding: rem(20) rem(40) rem(20) rem(20);
+    border-radius: var(--radius-medium);
+    border: var(--border-light-alt);
+    min-height: rem(200);
+  }
+}

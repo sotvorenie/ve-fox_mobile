@@ -1,0 +1,79 @@
+@use '../helpers/index' as *;
+
+.crop {
+  --settings-width: #{rem(70)};
+
+  background-color: color-mix(in srgb, var(--color-dark), transparent 5%);
+  z-index: 100001;
+
+  &__inner {
+    @include square(400);
+  }
+
+  &__settings {
+    background: var(--color-dark-alt);
+    width: var(--settings-width);
+    left: 100%;
+  }
+
+  &__zoom-info {
+    margin-top: rem(10);
+  }
+
+  &__zoom-btn {
+    --btn-bg-alpha: 50%;
+
+    @include square(38);
+    @include abs-x;
+
+    background-color: color-mix(in srgb, var(--color-dark), transparent var(--btn-bg-alpha));
+
+    @include hover() {
+      --btn-bg-alpha: 30%;
+    }
+
+    &.plus {
+      bottom: rem(307);
+    }
+    &.minus {
+      bottom: rem(15);
+    }
+
+    svg {
+      width: 60%;
+    }
+  }
+
+  &__zoom {
+    @include abs-x;
+
+    z-index: 1000000;
+    bottom: rem(65);
+
+    -webkit-appearance: none;
+    appearance: none;
+    writing-mode: vertical-lr;
+    direction: rtl;
+    vertical-align: bottom;
+    width: rem(8);
+    height: rem(230);
+    background: var(--color-light-alt);
+    border-radius: var(--radius-regular);
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      @include square(16);
+
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--color-accent);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
+  &__btn-bar {
+    width: calc(100% + var(--settings-width));
+    top: calc(100% + #{rem(10)});
+  }
+}

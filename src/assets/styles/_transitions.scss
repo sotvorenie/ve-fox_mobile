@@ -1,0 +1,10 @@
+@use './helpers/index' as *;
+
+.tr-opacity {
+  opacity: 0;
+  transition: opacity var(--transition-duration);
+
+  &.is-active {
+    opacity: 1;
+  }
+}

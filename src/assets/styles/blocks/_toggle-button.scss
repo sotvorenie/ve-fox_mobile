@@ -1,0 +1,29 @@
+@use '../helpers/index' as *;
+
+.toggle-button {
+  width: rem(45);
+  height: rem(25);
+  border: var(--border-light-alt);
+  border-radius: var(--radius-big);
+  padding-inline: rem(2);
+  transition: background-color var(--transition-duration);
+
+  &.is-active {
+    background: var(--color-light);
+  }
+
+  &__btn {
+    aspect-ratio: 1;
+    height: 90%;
+    background: var(--color-light);
+    border-radius: 50%;
+    transform: translateX(0);
+    transition: transform var(--transition-duration), background-color var(--transition-duration);
+    will-change: transform;
+
+    &.is-active {
+      transform: translateX(calc(100% - 2px));
+      background: var(--color-accent);
+    }
+  }
+}

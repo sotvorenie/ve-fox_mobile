@@ -1,0 +1,11 @@
+@use '../../helpers/index' as *;
+
+.video-page {
+  overflow-y: auto;
+
+  &__content {
+    padding-left: rem(20);
+    column-gap: rem(20);
+    padding-bottom: rem(120);
+  }
+}

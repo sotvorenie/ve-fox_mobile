@@ -1,0 +1,133 @@
+@use 'helpers' as *;
+
+.container {
+  max-width: var(--container-width);
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.hidden-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.visible-mobile {
+  @include mobile-above {
+    display: none !important;
+  }
+}
+
+.recolor-svg {
+  svg {
+    &[stroke]:not([stroke="none"]),
+    *[stroke]:not([stroke="none"]) {
+      stroke: currentColor !important;
+    }
+
+    &[fill]:not([fill="none"]),
+    *[fill]:not([fill="none"]) {
+      fill: currentColor !important;
+    }
+
+    path,
+    circle,
+    rect,
+    polygon,
+    polyline,
+    line,
+    ellipse {
+      &[stroke]:not([stroke="none"]) {
+        stroke: currentColor !important;
+      }
+      &[fill]:not([fill="none"]) {
+        fill: currentColor !important;
+      }
+    }
+  }
+}
+
+.img-container {
+  overflow: hidden;
+  user-select: none;
+
+  img, video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.i-svg {
+
+  svg {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+}
+
+.hover-color-accent {
+  transition:
+          color var(--transition-duration),
+          border-color var(--transition-duration);
+
+  @include hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+}
+
+.button-width-svg {
+
+  svg {
+    width: 80%;
+    height: auto;
+    max-height: 80%;
+  }
+}
+
+.one-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.two-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mb-10:not(:last-child) {
+  margin-bottom: rem(10);
+}
+.mb-15:not(:last-child) {
+  margin-bottom: rem(15);
+}
+.mb-20:not(:last-child) {
+  margin-bottom: rem(20);
+}
+.mb-30:not(:last-child) {
+  margin-bottom: rem(30);
+}
+.mb-40:not(:last-child) {
+  margin-bottom: rem(40);
+}
+
+.gap-10 {
+  gap: rem(10);
+}
+.gap-20 {
+  gap: rem(20);
+}
+
+.fs-16 {
+  font-size: rem(16);
+}
+.fs-14 {
+  font-size: rem(14);
+}

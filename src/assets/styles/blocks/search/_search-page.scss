@@ -1,0 +1,19 @@
+@use '../../helpers/index' as *;
+
+.search-page {
+
+  &__channels {
+    gap: rem(25);
+  }
+
+  &__channel {
+
+    a {
+      gap: rem(20);
+    }
+
+    &-avatar {
+      @include square(128);
+    }
+  }
+}

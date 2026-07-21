@@ -1,0 +1,80 @@
+@use '../../helpers/index' as *;
+
+.settings {
+
+  &__inner {
+    background-color: color-mix(in srgb, var(--color-dark), transparent 2%);
+
+    &:not(.is-active) {
+      pointer-events: none;
+    }
+  }
+
+  &__title {
+    border-bottom: var(--border-light);
+    padding-bottom: rem(10);
+  }
+
+  &__btn {
+    @include square(50);
+
+    background-color: color-mix(in srgb, var(--color-dark-alt), transparent 2%);
+    transition:
+            background-color var(--transition-duration),
+            right var(--transition-duration),
+            top var(--transition-duration),
+            border var(--transition-duration);
+    right: rem(40);
+    top: rem(30);
+    border: var(--border-light-alt);
+
+    @include hover() {
+      background-color: color-mix(in srgb, var(--color-light-alt), transparent 70%);
+    }
+
+    &.is-visible {
+      &:nth-child(1) {
+        right: rem(170);
+        top: rem(20);
+      }
+      &:nth-child(2) {
+        right: rem(185);
+        top: rem(90);
+      }
+      &:nth-child(3) {
+        right: rem(150);
+        top: rem(155);
+      }
+      &:nth-child(4) {
+        right: rem(80);
+        top: rem(180);
+      }
+    }
+
+    &.is-active {
+      color: var(--color-accent);
+      background-color: color-mix(in srgb, var(--color-light-alt), transparent 70%);
+      border-color: var(--color-accent);
+    }
+
+    svg {
+      width: 60%;
+    }
+  }
+
+  &__block {
+    width: rem(750);
+    min-height: rem(100);
+    background-color: var(--color-dark-alt);
+    border-radius: var(--radius-semi-big);
+    padding: rem(15);
+    border: var(--border-light-alt);
+  }
+
+  &__off {
+    @include square(60);
+
+    top: rem(20);
+    left: rem(20);
+  }
+}

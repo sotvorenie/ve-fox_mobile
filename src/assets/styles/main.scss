@@ -1,0 +1,44 @@
+@use 'normalize';
+@use 'fonts';
+@use 'variables';
+@use 'utils';
+@use 'globals';
+@use 'classes';
+@use 'transitions';
+
+@use 'blocks/input';
+@use 'blocks/button';
+@use 'blocks/layout/main-layout';
+@use 'blocks/layout/menu';
+@use 'blocks/skeleton';
+@use 'blocks/total';
+@use 'blocks/toggle-button';
+@use 'blocks/loading';
+@use 'blocks/modal';
+@use 'blocks/close-btn';
+@use 'blocks/margin-center-page';
+@use 'blocks/crop';
+@use 'blocks/search-history';
+
+@use 'blocks/auth/auth';
+
+@use 'blocks/header/header';
+@use 'blocks/header/settings';
+@use 'blocks/header/redact-user';
+
+@use 'blocks/channel/channel';
+
+@use 'blocks/video/video-item';
+@use 'blocks/video/video-menu';
+@use 'blocks/video/video-page';
+@use 'blocks/video/video';
+@use 'blocks/video/video-player';
+@use 'blocks/video/comments';
+@use 'blocks/video/comment';
+
+@use 'blocks/upload/upload-video';
+@use 'blocks/upload/upload-modal';
+@use 'blocks/upload/upload-loading';
+@use 'blocks/upload/uploaded-video';
+
+@use 'blocks/search/search-page';

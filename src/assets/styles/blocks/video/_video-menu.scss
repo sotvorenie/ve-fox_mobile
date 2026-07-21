@@ -1,0 +1,65 @@
+@use '../../helpers/index' as *;
+
+.video-menu {
+
+  &.is-active {
+
+    .video-menu__open {
+      --btn-bg-alpha: 50%;
+
+      border: var(--border-accent);
+      color: var(--color-accent);
+    }
+
+    .video-menu__content {
+      pointer-events: auto;
+      transform: scale(1);
+    }
+  }
+
+  &.is-small {
+
+    .video-menu__open {
+      @include square(27);
+
+      top: rem(5);
+      right: rem(5);
+    }
+
+    .video-menu__content {
+      top: rem(5);
+      right: rem(38);
+      padding: rem(10);
+      transform-origin: right rem(14);
+      font-size: rem(13);
+    }
+  }
+
+  &__open {
+    --btn-bg-alpha: 75%;
+
+    @include square(32);
+
+    background-color: color-mix(in srgb, var(--color-dark), transparent var(--btn-bg-alpha));
+    top: rem(10);
+    right: rem(10);
+
+    @include hover {
+      --btn-bg-alpha: 50%;
+    }
+  }
+
+  &__content {
+    background: var(--color-dark-alt);
+    top: rem(10);
+    right: rem(50);
+    padding: rem(12);
+    border-radius: var(--radius-regular);
+    line-height: 1;
+    border: var(--border-light-alt);
+    pointer-events: none;
+    transform-origin: right rem(16);
+    transform: scale(0);
+    transition: transform var(--transition-duration);
+  }
+}

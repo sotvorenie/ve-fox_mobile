@@ -1,0 +1,47 @@
+@use '../../helpers/index' as *;
+
+.redact-user {
+  --column-gap: #{rem(20)};
+
+  &__img-container {
+    border-radius: var(--radius-medium);
+    background-color: color-mix(in srgb, var(--color-light-alt), transparent 90%);
+
+    @include hover() {
+
+      &::before {
+        opacity: 1;
+      }
+
+      svg {
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: color-mix(in srgb, var(--color-dark), transparent 50%);
+      opacity: 0;
+      z-index: 1;
+      transition: opacity var(--transition-duration);
+      cursor: pointer;
+    }
+
+    svg {
+
+      &.tr-opacity {
+        @include square(100);
+      }
+      &:not(.tr-opacity) {
+        width: 80%;
+        height: auto;
+      }
+    }
+  }
+
+  &__redact {
+    margin-top: auto;
+  }
+}

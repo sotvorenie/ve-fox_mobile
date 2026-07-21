@@ -1,0 +1,28 @@
+@use 'helpers' as *;
+
+:root {
+  --color-light: #f1f1f1;
+  --color-light-alt: #aaaaaa;
+
+  --color-dark: #0f0f0f;
+  --color-dark-alt: #272727;
+
+  --color-accent: #fe7971;
+
+  --border-light: 1px solid var(--color-light);
+  --border-dark-alt: 1px solid var(--color-dark-alt);
+  --border-light-alt: 1px solid var(--color-light-alt);
+  --border-accent: 1px solid var(--color-accent);
+
+  --radius-regular: #{rem(8)};
+  --radius-medium: #{rem(12)};
+  --radius-semi-big: #{rem(20)};
+  --radius-big: #{rem(32)};
+
+  --font-family-base: 'Montserrat', sans-serif;
+
+  --container-width: #{rem(1920)};
+  --container-padding-x: #{rem(16)};
+
+  --transition-duration: 0.2s;
+}

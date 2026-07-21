@@ -1,0 +1,18 @@
+@use '../../helpers/index' as *;
+
+.main-layout {
+
+  &__right {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &__content {
+    padding: 0 rem(20) rem(40);
+    flex-grow: 1;
+  }
+
+  .video-list {
+    row-gap: rem(15) !important;
+  }
+}

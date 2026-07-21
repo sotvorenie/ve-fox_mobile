@@ -1,0 +1,93 @@
+@use '../../helpers/index' as *;
+
+.comment {
+
+  &__avatar {
+    @include square(36);
+  }
+
+  &__head {
+    margin-bottom: rem(5);
+  }
+
+  &__name {
+    color: var(--color-accent);
+  }
+
+  &__date {
+    gap: rem(5);
+  }
+
+  &__info {
+    color: var(--color-light-alt);
+  }
+
+  &__text {
+    margin-bottom: rem(8);
+  }
+
+  &__like {
+    gap: rem(8);
+
+    &.is-liked svg path {
+      fill: var(--color-accent) !important;
+      stroke: var(--color-accent);
+    }
+
+    svg {
+      @include square(18);
+    }
+  }
+
+  &__menu {
+
+    &-open {
+      @include square(32);
+    }
+
+    &-block {
+      @include abs-y;
+
+      background: var(--color-dark-alt);
+      padding: rem(10);
+      border-radius: var(--radius-regular);
+      right: rem(35);
+      transition:
+              opacity var(--transition-duration),
+              transform var(--transition-duration);
+
+      &:not(.is-active) {
+        transform: translateX(10px);
+        pointer-events: none;
+      }
+    }
+
+    &-btn {
+      padding: rem(10);
+      gap: rem(15);
+
+      svg {
+        @include square(24);
+      }
+    }
+  }
+
+  &__answer-count {
+    gap: rem(5);
+    margin-top: rem(10);
+
+    &:not(.is-active) svg {
+      rotate: 180deg;
+    }
+
+    svg {
+      @include square(20);
+
+      margin-left: rem(3);
+    }
+  }
+
+  &__input {
+    margin-block: rem(15);
+  }
+}

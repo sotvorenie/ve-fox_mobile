@@ -1,0 +1,14 @@
+@use '../helpers/index' as *;
+
+.close-btn {
+  @include square(45);
+
+  top: rem(-15);
+  right: rem(-15);
+  background-color: var(--color-dark-alt);
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
