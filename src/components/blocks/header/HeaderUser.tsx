@@ -4,13 +4,10 @@ import {BASE_URL} from "@api/url";
 
 import Portal from "@common/Portal";
 import SettingsRedactUser from "@settings/settingsRedactUser";
-import UploadVideo from "@upload/uploadVideo";
 
 import SettingsIcon from "@icons/video-player/SettingsIcon";
-import UploadIcon from "@icons/UploadIcon";
 import FilmIcon from "@icons/FilmIcon";
 import UserIcon from "@icons/UserIcon";
-import OffIcon from "@icons/OffIcon.tsx";
 
 import {useUserStore} from "@store/useUserStore";
 
@@ -27,15 +24,8 @@ function HeaderUser() {
     const [isVisibleSettings, setIsVisibleSettings] = useState<boolean>(false);
 
     const [isVisibleRedactUser, setIsVisibleRedactUser] = useState<boolean>(false)
-    const [isVisibleUploadVideo, setIsVisibleUploadVideo] = useState<boolean>(false)
 
     const settingsButtons: Button[] = [
-        {
-            title: 'Загрузить видео',
-            icon: UploadIcon,
-            activeElement: isVisibleUploadVideo,
-            func: () => {setIsVisibleUploadVideo(prev => !prev)},
-        },
         {
             title: 'Кино',
             icon: FilmIcon,
@@ -57,7 +47,6 @@ function HeaderUser() {
     ]
 
     const closeAllBlock = () => {
-        setIsVisibleUploadVideo(false)
         setIsVisibleRedactUser(false)
     }
 
@@ -66,10 +55,6 @@ function HeaderUser() {
         closeAllBlock()
 
         if (!button.activeElement) button.func()
-    }
-
-    const handleCloseApp = (e: MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation()
     }
 
     useEffect(() => {
@@ -125,17 +110,7 @@ function HeaderUser() {
                         )
                     })}
 
-                    <button className="settings__off position-absolute recolor-svg hover-color-accent button-width-svg"
-                            type="button"
-                            title="Выйти из приложения"
-                            onClick={handleCloseApp}
-                    >
-                        <OffIcon/>
-                    </button>
-
                     <SettingsRedactUser isVisible={isVisibleRedactUser} setIsVisible={setIsVisibleRedactUser}/>
-
-                    <UploadVideo isVisible={isVisibleUploadVideo} setIsVisible={setIsVisibleUploadVideo}/>
                 </div>
             </Portal>
         </div>
