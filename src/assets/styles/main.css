@@ -961,6 +961,12 @@ input, textarea {
 .input.has-cross .input__inp {
   padding-right: 3.4375rem;
 }
+.input.is-dark .input__name, .input.is-dark .input__counter {
+  background: var(--color-dark);
+}
+.input.is-dark .input__error {
+  background: transparent;
+}
 .input.is-transparent .input__inp {
   border-bottom: 1px solid var(--color-dark-alt);
   transition: padding-block var(--transition-duration), border-color var(--transition-duration);
@@ -970,10 +976,9 @@ input, textarea {
   border-color: var(--color-light);
 }
 .input:not(.is-transparent) .input__inp {
-  background: var(--color-dark-alt);
   border-radius: var(--radius-regular);
   border: 1px solid currentColor;
-  padding: 0.9375rem;
+  padding: 0.625rem;
 }
 .input__inp {
   border: none;
@@ -1007,7 +1012,6 @@ input, textarea {
 }
 .input__error {
   top: calc(100% + 0.3125rem);
-  left: 0.3125rem;
   color: var(--color-accent);
 }
 .input__clear {
@@ -1022,7 +1026,7 @@ input, textarea {
 }
 
 .button {
-  padding: 0.625rem 0.9375rem;
+  padding: 0.75rem 0.9375rem;
   line-height: 1;
   border: 1px solid var(--color-light);
   font-weight: 500;
@@ -1302,37 +1306,22 @@ input, textarea {
   top: calc(100% + 0.625rem);
 }
 
-.auth__header {
-  gap: 1.875rem;
-  margin-bottom: 1.875rem;
-  font-size: 1.5rem;
+.auth {
+  padding-inline: 1.875rem;
 }
-.auth__btn.is-active {
-  cursor: default;
-  pointer-events: none;
+.auth__title, .auth__bottom {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+}
+.auth__title, .auth__btn {
   color: var(--color-accent);
 }
-.auth__form {
-  width: min(50vw, 25rem);
+.auth__title {
+  bottom: calc(100% + 0.625rem);
 }
-.auth__input {
-  padding: 0.9375rem;
-  border-radius: var(--radius-medium);
-}
-.auth__input:not(:last-child) {
-  margin-bottom: 1.875rem;
-}
-.auth__error {
-  bottom: 0.625rem;
-  left: 0.625rem;
-  color: var(--color-accent);
-}
-.auth__submit {
-  border: 1px solid var(--color-light);
-  padding: 0.625rem;
-  font-size: 1.25rem;
-  border-radius: var(--radius-medium);
-  margin-top: 1.25rem;
+.auth__bottom {
+  bottom: 6.25rem;
 }
 
 .header {
@@ -1764,7 +1753,7 @@ input, textarea {
   background: var(--color-light-alt);
 }
 .video-item__timeline {
-  height: 0.3125rem;
+  height: 0.1875rem;
   background: var(--color-light-alt);
 }
 .video-item__timeline div {

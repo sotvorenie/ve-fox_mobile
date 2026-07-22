@@ -8,9 +8,9 @@ import {apiAuth, apiRegister} from "@api/auth/auth";
 import {onSubmit, onBlur, onInput} from "@composables/useFormValidation";
 import {showWarning} from "@utils/modals";
 
-import LoadingIcon from "@icons/LoadingIcon";
-
 import {useUserStore} from "@store/useUserStore";
+import InputUi from "@ui/InputUi.tsx";
+import ButtonUi from "@ui/ButtonUi.tsx";
 
 function AuthPage() {
     const navigate = useNavigate();
@@ -58,120 +58,111 @@ function AuthPage() {
     }
 
     return (
-        <div className="auth flex-center flex-column h-100">
-
-            <div className="auth__header flex flex-align-center">
-                <button className={`auth__btn hover-color-accent ${isAuth ? 'is-active' : ''}`}
-                        type="button"
-                        onClick={() => {
-                            clear()
-                            setIsAuth(true)
-                        }}
-                        disabled={isLoading}
-                >
-                    Авторизация
-                </button>
-                <button className={`auth__btn hover-color-accent ${isAuth ? '' : 'is-active'}`}
-                        type="button"
-                        onClick={() => {
-                            clear()
-                            setIsAuth(false)
-                        }}
-                        disabled={isLoading}
-                >Регистрация
-                </button>
-            </div>
-
-            <form className="auth__form flex flex-column"
+        <div className="auth flex-center h-100">
+            <form className="auth__form flex flex-column w-100 position-relative"
                   noValidate
                   method="post"
                   data-js-form=""
                   onSubmit={(e) => {
                       e.preventDefault()
-                      submit(e).then(() => {})
+                      submit(e).then(() => {
+                      })
                   }}
             >
-                <label htmlFor="login" className="auth__label position-relative">
-                    <span className="visually-hidden">Логин</span>
-                    <input type="text"
-                           id="login"
-                           className="auth__input input w-100"
-                           placeholder="Логин"
-                           required
-                           aria-describedby="login-error"
-                           value={login}
-                           onChange={(e) => setLogin(e.target.value)}
-                           autoComplete="username"
-                           onBlur={(e) => onBlur(e.nativeEvent)}
-                           onInput={(e) => onInput(e.nativeEvent)}
-                           minLength={4}
-                           maxLength={15}
-                           readOnly={isLoading}
-                    />
-                    <span className="auth__error fields_error position-absolute"
-                          id="login-error"
-                          data-js-form-field-errors=""
-                    />
-                </label>
-                <label htmlFor="password" className="auth__label position-relative">
-                    <span className="visually-hidden">Пароль</span>
-                    <input type="text"
-                           id="password"
-                           className="auth__input input w-100"
-                           placeholder="Пароль"
-                           required
-                           aria-describedby="password-error"
-                           value={password}
-                           onChange={(e) => setPassword(e.target.value)}
-                           onBlur={(e) => onBlur(e.nativeEvent)}
-                           onInput={(e) => onInput(e.nativeEvent)}
-                           minLength={4}
-                           maxLength={15}
-                           readOnly={isLoading}
-                    />
-                    <span className="auth__error fields_error position-absolute"
-                          id="password-error"
-                          data-js-form-field-errors=""
-                    />
-                </label>
+                <span className="auth__title h3 text-w500 mb-20">{isAuth ? 'Авторизация' : 'Регистрация'}</span>
+
+                <InputUi name="login"
+                         id="login"
+                         title="Логин"
+                         value={login}
+                         setValue={setLogin}
+                         required
+                         autoComplete="username"
+                         onBlur={(e) => onBlur(e.nativeEvent)}
+                         onInput={(e) => onInput(e.nativeEvent)}
+                         minLength={4}
+                         maxLength={15}
+                         readOnly={isLoading}
+                         isDark
+                         className="mb-30"
+                />
+
+                <InputUi name="password"
+                         id="password"
+                         title="Пароль"
+                         value={password}
+                         setValue={setPassword}
+                         onBlur={(e) => onBlur(e.nativeEvent)}
+                         onInput={(e) => onInput(e.nativeEvent)}
+                         minLength={4}
+                         maxLength={15}
+                         readOnly={isLoading}
+                         isDark
+                         className="mb-30"
+                />
 
                 {!isAuth && (
-                    <label htmlFor="name" className="auth__label position-relative">
-                        <span className="visually-hidden">Имя пользователя</span>
-                        <input type="text"
-                               id="name"
-                               className="auth__input input w-100"
-                               placeholder="Имя пользователя"
-                               required={!isAuth}
-                               aria-describedby="name-error"
-                               value={name}
-                               onChange={(e) => setName(e.target.value)}
-                               onBlur={(e) => onBlur(e.nativeEvent)}
-                               onInput={(e) => onInput(e.nativeEvent)}
-                               minLength={4}
-                               maxLength={15}
-                               readOnly={isLoading}
-                        />
-                        <span className="auth__error fields_error position-absolute"
-                              id="name-error"
-                              data-js-form-field-errors=""
-                        />
-                    </label>
+                    <InputUi name="name"
+                             id="name"
+                             title="Имя пользователя"
+                             value={name}
+                             setValue={setName}
+                             onBlur={(e) => onBlur(e.nativeEvent)}
+                             onInput={(e) => onInput(e.nativeEvent)}
+                             minLength={4}
+                             maxLength={15}
+                             readOnly={isLoading}
+                             required={!isAuth}
+                             isDark
+                             className="mb-30"
+                    />
                 )}
 
-                <button className="auth__submit hover-color-accent flex-center recolor-svg"
-                        type="submit"
-                        disabled={isLoading}
+                <ButtonUi func={() => {
+                }}
+                          isSubmit
+                          isLoading={isLoading}
+                          className="mb-15"
                 >
-                    {isLoading ? (<LoadingIcon/>) : buttonText}
-                </button>
+                    {buttonText}
+                </ButtonUi>
 
-                <button className="auth__submit hover-color-accent"
-                        type="button"
-                        onClick={goWithoutLogin}
-                >Войти как Гость
-                </button>
+                <ButtonUi func={goWithoutLogin}>
+                    Войти как Гость
+                </ButtonUi>
             </form>
+
+            <div className="auth__bottom text-nowrap">
+                {isAuth ? (
+                    <div className="flex flex-align-center gap-8 fs-14">
+                        <span>Ещё не зарегистрированы? </span>
+                        <button className="auth__btn"
+                                type="button"
+                                onClick={() => {
+                                    clear()
+                                    setIsAuth(false)
+                                }}
+                                disabled={isLoading}
+                        >
+                            Регистрация
+                        </button>
+                    </div>
+                ) : (
+                    <div className="flex flex-align-center gap-8 fs-14">
+                        <span>Уже есть профиль? </span>
+                        <button className={`auth__btn hover-color-accent ${isAuth ? 'is-active' : ''}`}
+                                type="button"
+                                onClick={() => {
+                                    clear()
+                                    setIsAuth(true)
+                                }}
+                                disabled={isLoading}
+                        >
+                            Авторизуйтесь
+                        </button>
+                    </div>
+                )}
+            </div>
 
         </div>
     )

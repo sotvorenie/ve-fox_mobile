@@ -9,6 +9,15 @@
       padding-right: rem(55);
     }
   }
+  &.is-dark {
+
+    .input__name, .input__counter {
+      background: var(--color-dark);
+    }
+    .input__error {
+      background: transparent;
+    }
+  }
   &.is-transparent {
 
     .input__inp {
@@ -23,14 +32,12 @@
       }
     }
   }
-
   &:not(.is-transparent) {
 
     .input__inp {
-      background: var(--color-dark-alt);
       border-radius: var(--radius-regular);
       border: 1px solid currentColor;
-      padding: rem(15);
+      padding: rem(10);
     }
   }
 
@@ -65,7 +72,6 @@
 
   &__error {
     top: calc(100% + #{rem(5)});
-    left: rem(5);
     color: var(--color-accent);
   }
 

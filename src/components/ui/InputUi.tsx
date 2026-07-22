@@ -15,6 +15,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     hasCross?: boolean
     isTransparent?: boolean
     placeholder?: string
+    isDark?: boolean
 }
 
 const InputUi = forwardRef<HTMLInputElement, Props>(({
@@ -30,6 +31,7 @@ const InputUi = forwardRef<HTMLInputElement, Props>(({
     hasCross = false,
     isTransparent = false,
     placeholder,
+    isDark = false,
     ...rest
 }, ref) => {
     const handleClear = () => {
@@ -41,6 +43,7 @@ const InputUi = forwardRef<HTMLInputElement, Props>(({
                     input position-relative 
                     ${hasCross ? 'has-cross' : ''} 
                     ${isTransparent ? 'is-transparent' : ''}
+                    ${isDark ? 'is-dark' : ''}
                     ${className}
                 `} htmlFor={id}
         >
@@ -74,7 +77,7 @@ const InputUi = forwardRef<HTMLInputElement, Props>(({
                 </span>
             )}
 
-            <span className="input__error input__text fields_error position-absolute"
+            <span className="input__error input__text fields_error position-absolute left-0"
                   id={`${id}-error`}
                   data-js-form-field-errors=""
             ></span>
