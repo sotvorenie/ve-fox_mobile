@@ -14,6 +14,7 @@ import VideoRecommended from "@video/VideoRecommended";
 
 import {useVideoStore} from "@store/useVideoStore";
 import {useUserStore} from "@store/useUserStore";
+import {useCommentsStore} from "@store/useCommentsStore.ts";
 
 function VideoPage() {
     const { id } = useParams<{ id: string }>();
@@ -25,6 +26,7 @@ function VideoPage() {
         getRecommendedVideos,
     } = useVideoStore()
     const {isLogged} = useUserStore()
+    const {isOpen} = useCommentsStore()
 
     const [isLiked, setIsLiked] = useState<boolean>(false)
     const [isWatchLater, setIsWatchLater] = useState<boolean>(false)
@@ -76,17 +78,15 @@ function VideoPage() {
     }, [])
 
     return(
-        <div className="h-100 overflow-y-auto">
-            <div className="video-page__content">
-                <VideoMain isLiked={isLiked}
-                           setIsLiked={setIsLiked}
-                           isWatchLater={isWatchLater}
-                           setIsWatchLater={setIsWatchLater}
-                           savedTime={savedTime}
-                />
+        <div className={`${isOpen ? '' : 'overflow-y-auto'}`}>
+            <VideoMain isLiked={isLiked}
+                       setIsLiked={setIsLiked}
+                       isWatchLater={isWatchLater}
+                       setIsWatchLater={setIsWatchLater}
+                       savedTime={savedTime}
+            />
 
-                <VideoRecommended id={id}/>
-            </div>
+            {!isOpen && <VideoRecommended id={id}/>}
         </div>
     );
 }

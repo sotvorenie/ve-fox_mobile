@@ -20,12 +20,14 @@ interface Props {
     initialComment: CommentForListResponse
     deleteComment: (id: number) => Promise<void>
     answerLevel?: number
+    isOnePopular?: boolean
 }
 
 const Comment = forwardRef<HTMLLIElement, Props>(({
     initialComment,
     deleteComment,
-    answerLevel = 1
+    answerLevel = 1,
+    isOnePopular = false
 }, ref) => {
     const {user} = useUserStore()
 
@@ -107,7 +109,7 @@ const Comment = forwardRef<HTMLLIElement, Props>(({
 
                         <p className="comment__text fs-16">{comment.text}</p>
 
-                        {comment.user.id !== user.id && (
+                        {comment.user.id !== user.id && !isOnePopular && (
                             <div className="comment__actions flex flex-align-center gap-20 line-height-1 mb-15">
                                 <button className={`
                                             comment__like recolor-svg button-width-svg hover-color-accent flex flex-align-center fs-14
@@ -140,7 +142,7 @@ const Comment = forwardRef<HTMLLIElement, Props>(({
                         />
                     </div>
 
-                    {comment.user.id === user.id && !isLoading && (
+                    {comment.user.id === user.id && !isLoading && !isOnePopular && (
                         <CommentMenu handleRedact={handleRedact}
                                      deleteComment={() => deleteComment(comment.id)}
                         />

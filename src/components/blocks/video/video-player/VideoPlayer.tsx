@@ -84,7 +84,7 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
     useEffect(() => {
         clearData()
 
-        if (videoRef.current) {
+        if (videoRef.current && isLogged) {
             const timerTime: number = video.duration >= 600 ? 60000 : 30000
 
             if (saveTimeTimer.current) clearTimeout(saveTimeTimer.current)
@@ -220,7 +220,7 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
 
     return (
         <section className={
-                    `video-player position-relative
+                    `video-player position-relative mb-10
                     ${isFullscreen ? 'is-fullscreen' : ''}
                     ${isShowControls ? '' : 'controls-hidden'}`
                  }

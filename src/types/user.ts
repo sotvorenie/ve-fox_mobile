@@ -22,7 +22,3 @@ export interface Token {
 export interface UserAvatar {
     new_avatar_url: string
 }
-
-export interface UserRouterMap {
-    router_map: string
-}

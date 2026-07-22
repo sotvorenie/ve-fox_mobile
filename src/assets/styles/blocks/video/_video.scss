@@ -46,28 +46,4 @@
   &__like span {
     margin-top: rem(4);
   }
-
-  &__intersect {
-    width: 100vw;
-    margin-left: rem(-10);
-    aspect-ratio: 16/9;
-
-    &:has(.is-fullscreen) {
-      position: fixed;
-      inset: 0;
-      z-index: 1000000;
-    }
-
-    &.mini-player {
-
-      .video__intersect_wrapper:not(:has(.is-fullscreen)) {
-        position: fixed;
-        width: rem(500);
-      }
-
-      .video-player__play-btn {
-        @include square(42);
-      }
-    }
-  }
 }

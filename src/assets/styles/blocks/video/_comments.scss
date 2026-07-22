@@ -1,19 +1,41 @@
 @use '../../helpers/index' as *;
 
 .comments {
+  background: var(--color-dark-alt);
+  padding: rem(10) rem(10) rem(5);
+
+  &:not(.is-open) {
+    border-radius: var(--radius-medium);
+    margin-bottom: rem(15) !important;
+  }
+  &.is-open {
+    padding-bottom: rem(20);
+    margin-top: rem(-10);
+    width: 100vw;
+    margin-left: rem(-10);
+    overflow-y: auto;
+  }
 
   .button {
     padding: rem(10);
   }
 
+  &__open, &__close {
+    @include square(28);
+  }
+
+  &__open {
+    top: rem(10);
+    right: rem(10);
+    rotate: 180deg;
+  }
+
   &__sort {
 
     &-open {
-      font-size: rem(16);
-      align-items: end;
 
       svg {
-        @include square(25);
+        @include square(22);
       }
     }
 
@@ -21,7 +43,7 @@
       top: calc(100% + #{rem(10)});
       background: var(--color-dark-alt);
       border-radius: var(--radius-regular);
-      padding: rem(10);
+      padding: rem(5);
 
       &:not(.is-active) {
         pointer-events: none;
@@ -29,7 +51,7 @@
     }
 
     &-btn {
-      padding: rem(15) rem(25);
+      padding: rem(10) rem(15);
       border-radius: var(--radius-regular);
 
       &.is-active {

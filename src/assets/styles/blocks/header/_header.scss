@@ -2,6 +2,7 @@
 
 .header {
   border-bottom: var(--border-dark-alt);
+  background: var(--color-dark);
 
   &:not(.search-is-open) {
     gap: rem(30);

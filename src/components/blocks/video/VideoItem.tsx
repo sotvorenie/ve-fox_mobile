@@ -40,7 +40,7 @@ function Preview({video, isRecommendation}: Readonly<PreviewProps>) {
         <div className="video-item__preview img-container position-relative mb-10">
             <img src={`${BASE_URL}${video.preview_url}`} alt={video.name} loading="lazy"/>
 
-            <span className="position-absolute z-1001">{formatVideoTime(video.duration)}</span>
+            <span className="position-absolute">{formatVideoTime(video.duration)}</span>
 
             <VideoMenu id={video.id} isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} isSmall={isRecommendation}/>
 

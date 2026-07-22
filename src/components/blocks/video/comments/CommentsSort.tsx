@@ -29,7 +29,7 @@ function CommentsSort({isPopular, setIsPopular}: Readonly<Props>) {
 
     return (
         <div className="comments__sort position-relative" ref={commentsSortRef}>
-            <button className="comments__sort-open recolor-svg hover-color-accent flex gap-10"
+            <button className="comments__sort-open recolor-svg hover-color-accent flex gap-10 fs-14"
                     type="button"
                     onClick={() => setSortIsOpen(prev => !prev)}
             >
@@ -38,7 +38,7 @@ function CommentsSort({isPopular, setIsPopular}: Readonly<Props>) {
             </button>
 
             <div className={`
-                            comments__sort-block flex flex-column position-absolute z-1 text-nowrap tr-opacity fs-16
+                            comments__sort-block flex flex-column position-absolute z-100 text-nowrap tr-opacity fs-16
                             ${sortIsOpen ? 'is-active' : ''}
                         `}>
                 <button className={`comments__sort-btn hover-color-accent text-left ${isPopular ? '' : 'is-active'}`}

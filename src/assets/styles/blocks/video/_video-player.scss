@@ -1,6 +1,8 @@
 @use '../../helpers/index' as *;
 
 .video-player {
+  width: 100vw;
+  margin-left: rem(-10);
   aspect-ratio: 16/9;
   background: var(--color-dark-alt);
 

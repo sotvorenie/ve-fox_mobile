@@ -11,12 +11,13 @@ import {formatCount} from "@composables/useFormatCount.ts";
 import {formatDateAgo} from "@composables/useFormatDateAgo.ts";
 
 import Comments from "@video/comments/Comments.tsx";
-import VideoIntersect from "@video/VideoIntersect.tsx";
+import VideoPlayer from "@video/video-player/VideoPlayer.tsx";
 
 import LikeIcon from "@icons/LikeIcon";
 
 import {useVideoStore} from "@store/useVideoStore";
 import {useUserStore} from "@store/useUserStore.ts";
+import {useCommentsStore} from "@store/useCommentsStore.ts";
 
 interface Props {
     isLiked: boolean
@@ -29,6 +30,7 @@ interface Props {
 function VideoMain({isLiked, setIsLiked, isWatchLater, setIsWatchLater, savedTime}: Readonly<Props>) {
     const {video} = useVideoStore()
     const {isLogged} = useUserStore()
+    const {isOpen} = useCommentsStore()
 
     const [likeIsActive, setLikeIsActive] = useState<boolean>(true)
     const [watchLaterIsActive, setWatchLaterIsActive] = useState<boolean>(true)
@@ -62,57 +64,61 @@ function VideoMain({isLiked, setIsLiked, isWatchLater, setIsWatchLater, savedTim
 
     return (
         <div className="video">
-            <VideoIntersect savedTime={savedTime}/>
+            <VideoPlayer savedTime={savedTime}/>
 
-            <p className="text-w700 two-lines mb-5">{video?.name}</p>
+            {!isOpen && (
+                <>
+                    <p className="text-w700 two-lines mb-5">{video?.name}</p>
 
-            <div className="flex flex-align-center gap-8 fs-14 mb-10">
-                <span>{video.views} {formatCount(video.views, viewsArr)}</span>
-                <div className="video-item__dot"/>
-                <span>{formatDateAgo(video.date)}</span>
-            </div>
+                    <div className="flex flex-align-center gap-8 fs-14 mb-10">
+                        <span>{video.views} {formatCount(video.views, viewsArr)}</span>
+                        <div className="video-item__dot"/>
+                        <span>{formatDateAgo(video.date)}</span>
+                    </div>
 
-            {video?.video_url ? (
-                <div className="flex gap-10 mb-15">
-                    <button
-                        className={`video__button video__like recolor-svg flex flex-align-center gap-10 ${isLiked ? 'fill' : ''}`}
-                        type="button"
-                        disabled={!likeIsActive || !isLogged}
-                        onClick={handleLike}
-                    >
-                        <span>{video.likes}</span>
-                        <LikeIcon/>
-                    </button>
-                    {isLogged && (
-                        <button className={`video__button ${isWatchLater ? 'fill' : ''}`}
+                    {video?.video_url ? (
+                        <div className="flex gap-10 mb-15">
+                            <button
+                                className={`video__button video__like recolor-svg flex flex-align-center gap-10 ${isLiked ? 'fill' : ''}`}
                                 type="button"
-                                disabled={!watchLaterIsActive}
-                                onClick={handleWatchLater}
-                        >
-                            {isWatchLater ? 'Удалить из "Смотреть позже"' : 'Смотреть позже'}
-                        </button>
-                    )}
-                </div>
-            ) : null}
+                                disabled={!likeIsActive || !isLogged}
+                                onClick={handleLike}
+                            >
+                                <span>{video.likes}</span>
+                                <LikeIcon/>
+                            </button>
+                            {isLogged && (
+                                <button className={`video__button ${isWatchLater ? 'fill' : ''}`}
+                                        type="button"
+                                        disabled={!watchLaterIsActive}
+                                        onClick={handleWatchLater}
+                                >
+                                    {isWatchLater ? 'Удалить из "Смотреть позже"' : 'Смотреть позже'}
+                                </button>
+                            )}
+                        </div>
+                    ) : null}
 
-            <Link to={`/channel/${video.channel.id}`}
-                  state={{
-                      channel: {
-                          name: video.channel.name,
-                          avatar: video.channel.avatar_url,
-                      }
-                  }}
-                  className="video__channel h5 flex gap-10 flex-align-center hover-color-accent mb-20"
-            >
-                <div className="video__channel-avatar img-container"
-                >
-                    {video.channel.avatar_url ?
-                        (<img src={`${BASE_URL}${video.channel.avatar_url}`} alt={video.channel.name}/>) :
-                        (<span>{video?.channel.name?.slice(0, 1)}</span>)
-                    }
-                </div>
-                <span className="video__channel-name text-w700">{video.channel.name}</span>
-            </Link>
+                    <Link to={`/channel/${video.channel.id}`}
+                          state={{
+                              channel: {
+                                  name: video.channel.name,
+                                  avatar: video.channel.avatar_url,
+                              }
+                          }}
+                          className="video__channel h5 flex gap-10 flex-align-center hover-color-accent mb-15"
+                    >
+                        <div className="video__channel-avatar img-container"
+                        >
+                            {video.channel.avatar_url ?
+                                (<img src={`${BASE_URL}${video.channel.avatar_url}`} alt={video.channel.name}/>) :
+                                (<span>{video?.channel.name?.slice(0, 1)}</span>)
+                            }
+                        </div>
+                        <span className="video__channel-name text-w700">{video.channel.name}</span>
+                    </Link>
+                </>
+            )}
 
             <Comments/>
         </div>

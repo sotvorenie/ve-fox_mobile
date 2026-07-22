@@ -1,0 +1,15 @@
+@use '../../helpers/index' as *;
+
+.user-page {
+
+  &__btn {
+    @include square(32);
+  }
+
+  &__empty {
+
+    svg {
+      @include square(64);
+    }
+  }
+}

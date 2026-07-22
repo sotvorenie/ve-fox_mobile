@@ -9,7 +9,11 @@ export const apiGetVideoComments = (
     limit: number = 21,
     isNew: boolean = true
 ): Promise<CommentsListResponse> => {
-    return apiGet(`/comment/${videoId}?page=${page}&limit=${limit}&is_new=${isNew}`)
+    return apiGet(`/comment/${videoId}?page=${page}&limit=${limit}&is_new=${isNew}&get_total=false`)
+}
+
+export const apiGetPopularVideoComment = (videoId: number): Promise<CommentsListResponse> => {
+    return apiGet(`/comment/popular/${videoId}`)
 }
 
 export const apiGetCommentAnswers = (
