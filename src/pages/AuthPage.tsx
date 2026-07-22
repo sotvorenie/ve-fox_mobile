@@ -8,9 +8,10 @@ import {apiAuth, apiRegister} from "@api/auth/auth";
 import {onSubmit, onBlur, onInput} from "@composables/useFormValidation";
 import {showWarning} from "@utils/modals";
 
-import {useUserStore} from "@store/useUserStore";
 import InputUi from "@ui/InputUi.tsx";
 import ButtonUi from "@ui/ButtonUi.tsx";
+
+import {useUserStore} from "@store/useUserStore";
 
 function AuthPage() {
     const navigate = useNavigate();
