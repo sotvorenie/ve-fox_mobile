@@ -27,9 +27,13 @@
   }
 
   &__play-btn {
-    @include square(40);
+    @include square(80);
 
     color: var(--color-accent);
+
+    svg {
+      @include square(40);
+    }
   }
 
   &__timeline {

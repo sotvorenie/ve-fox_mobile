@@ -9,7 +9,6 @@
 }
 
 * {
-  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent !important;
 }
 
@@ -1888,11 +1887,17 @@ input, textarea {
   object-fit: contain;
 }
 .video-player__play-btn {
+  width: 5rem;
+  height: 5rem;
+  min-height: 5rem;
+  min-width: 5rem;
+  color: var(--color-accent);
+}
+.video-player__play-btn svg {
   width: 2.5rem;
   height: 2.5rem;
   min-height: 2.5rem;
   min-width: 2.5rem;
-  color: var(--color-accent);
 }
 .video-player__timeline {
   --progress: 0%;

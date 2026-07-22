@@ -25,11 +25,9 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
         isShowControls,
         isFullscreen,
         duration,
-        isMiniPlayer,
     } = usePlayerStore();
     const {
         setIsPlaying,
-        toggleIsPlaying,
         setDuration,
         setCurrentTime,
         setIsShowControls,
@@ -43,15 +41,11 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
 
     const [isRecommendedOpen, setIsRecommendedOpen] = useState<boolean>(false)
 
-    const sectionRef = useRef<HTMLElement | null>(null)
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const controlsRef = useRef<ControlsHandles>(null)
 
     const hideControlsTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-    const cursorTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
     const saveTimeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-    const isPlayingRef = useRef(isPlaying)
 
     // при загрузке метаданных видео
     const loadedMetadata = () => {
@@ -68,7 +62,6 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
         setCurrentTime(e.currentTarget.currentTime)
         setProgress((e.currentTarget.currentTime / videoRef.current.duration) * 100)
     }
-
     // перемещение timeline
     const updateVideoTime = (e: TouchEvent) => {
         if (!controlsRef.current?.timeline || !videoRef.current) return
@@ -81,6 +74,50 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
         videoRef.current.currentTime = percent * duration
     }
 
+    // показываем/скрываем контроллеры при клике на видео (если оно не на паузе)
+    const handleVideoHidden = () => {
+        if (isShowControls && isPlaying) {
+            setIsShowControls(false)
+            if (hideControlsTimer.current) {
+                clearTimeout(hideControlsTimer.current)
+                hideControlsTimer.current = null
+            }
+        } else updateTimerForControls()
+    }
+
+    // обнуляем и перезапускаем таймер для контролеров (для клика по видео и для useEffect)
+    const updateTimerForControls = () => {
+        if (hideControlsTimer.current) {
+            clearTimeout(hideControlsTimer.current)
+            hideControlsTimer.current = null
+        }
+
+        setIsShowControls(true)
+
+        if (isPlaying && !isShowSettings && !isMoving) {
+            hideControlsTimer.current = setTimeout(() => {
+                setIsShowControls(false)
+            }, 2000)
+        }
+    }
+
+    // проверка: двойной клик по левой или по правой части видео
+    const handleDoubleClick = (e: React.MouseEvent) => {
+        if (!videoRef.current) return
+        const isLeft: boolean = e.clientX < videoRef.current.getBoundingClientRect().width / 2
+        isLeft ? setMinus10Sec() : setPlus10Sec()
+    }
+
+    // +- 10 секунд
+    const setPlus10Sec = () => {
+        if (!videoRef?.current) return
+        videoRef.current.currentTime = Math.min(videoRef.current.currentTime + 10, duration)
+    }
+    const setMinus10Sec = () => {
+        if (!videoRef.current) return
+        videoRef.current.currentTime = Math.max(videoRef.current.currentTime - 10, 0)
+    }
+
     useEffect(() => {
         clearData()
 
@@ -90,7 +127,7 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
             if (saveTimeTimer.current) clearTimeout(saveTimeTimer.current)
 
             saveTimeTimer.current = setInterval(() => {
-                if (isPlayingRef.current && isLogged) {
+                if (usePlayerStore.getState().isPlaying && isLogged) {
                     apiSaveTime(video.id, videoRef.current!.currentTime).then()
                 }
             }, timerTime)
@@ -132,37 +169,18 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
             }
         }
         playVideo().then()
+    }, [video.id, isPlaying])
 
-        setIsShowControls(true)
-
-        const moveCursor = () => {
-            setIsShowControls(true)
-
-            if (cursorTimer.current) clearTimeout(cursorTimer.current)
-            cursorTimer.current = setTimeout(() => {
-                setIsShowControls(false)
-            }, 2000)
-        }
-
-        if (isPlaying && !isShowSettings) {
-            if (hideControlsTimer.current) clearTimeout(hideControlsTimer.current)
-            hideControlsTimer.current = setTimeout(() => {
-                setIsShowControls(false)
-            }, 2000)
-
-            sectionRef.current?.addEventListener('click', moveCursor)
-        } else {
-            setIsShowControls(true)
-        }
+    useEffect(() => {
+        updateTimerForControls()
 
         return () => {
-            if (hideControlsTimer.current && cursorTimer.current) {
+            if (hideControlsTimer.current) {
                 clearTimeout(hideControlsTimer.current)
-                clearTimeout(cursorTimer.current)
+                hideControlsTimer.current = null
             }
-            sectionRef.current?.removeEventListener('click', moveCursor)
         }
-    }, [isPlaying, isShowSettings, isFullscreen, video.id])
+    }, [isPlaying, isShowSettings, isFullscreen, isMoving])
 
     useEffect(() => {
         const touchMove = (e: TouchEvent) => {
@@ -209,10 +227,6 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
     }, [isShowSettings])
 
     useEffect(() => {
-        isPlayingRef.current = isPlaying
-    }, [isPlaying])
-
-    useEffect(() => {
         if (videoRef.current) {
             videoRef.current.currentTime = savedTime
         }
@@ -224,14 +238,12 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
                     ${isFullscreen ? 'is-fullscreen' : ''}
                     ${isShowControls ? '' : 'controls-hidden'}`
                  }
-                 ref={sectionRef}
                  aria-label="Видео-плеер"
         >
-            {!isMiniPlayer && (
-                <button className="video-player__hidden position-absolute inset-0 z-100 cursor-pointer"
-                        onClick={toggleIsPlaying}
-                />
-            )}
+            <button className="video-player__hidden position-absolute inset-0 z-100 cursor-pointer"
+                    onClick={handleVideoHidden}
+                    onDoubleClick={handleDoubleClick}
+            />
 
             {/*eslint-disable jsx-a11y/media-has-caption*/}
             <video src={`${BASE_URL}${video?.video_url}`}
@@ -253,7 +265,7 @@ function VideoPlayer({savedTime}: Readonly<Props>) {
                 )}
             </video>
 
-            {!isMiniPlayer && <VideoPlayerSettings isVisible={isShowSettings}/>}
+            <VideoPlayerSettings isVisible={isShowSettings}/>
 
             <VideoPlayerControls setIsShowSettings={setIsShowSettings}
                                  progress={progress}

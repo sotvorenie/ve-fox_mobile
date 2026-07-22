@@ -15,7 +15,7 @@ interface PlayerState {
     setDuration: (duration: number) => void
     setCurrentTime: (currentTime: number) => void
     setIsShowSettings: (value: boolean) => void
-    setIsShowControls: (value: boolean) => void
+    setIsShowControls: (value: any) => void
     setIsFullscreen: (value: boolean) => void
     toggleIsFullscreen: () => void
     setIsMiniPlayer: (value: boolean) => void

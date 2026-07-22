@@ -37,8 +37,12 @@ const VideoPlayerControls = forwardRef<ControlsHandles, Props>((props, ref) => {
         isFullscreen,
         currentTime,
         duration,
+        isShowControls,
     } = usePlayerStore()
-    const {toggleIsFullscreen, toggleIsPlaying} = usePlayerStore()
+    const {
+        toggleIsFullscreen,
+        toggleIsPlaying,
+    } = usePlayerStore()
 
     const touchStart = (e: React.TouchEvent | React.MouseEvent) => {
         if (!videoRef.current || !timelineRef.current) return
@@ -49,13 +53,13 @@ const VideoPlayerControls = forwardRef<ControlsHandles, Props>((props, ref) => {
 
     return (
         <>
-            <VideoPlayButton className='video-player__play-btn absolute-center'
+            <VideoPlayButton className='video-player__play-btn absolute-center z-100 flex-center'
                              isPlaying={isPlaying}
                              setIsPlaying={toggleIsPlaying}
             />
 
             <div className="video-player__bottom">
-                <span className="video-player__duration text-nowrap position-absolute">
+                <span className="video-player__duration text-nowrap position-absolute text-w500">
                     {formatVideoTime(currentTime)} / {formatVideoTime(duration)}
                 </span>
 
@@ -81,7 +85,7 @@ const VideoPlayerControls = forwardRef<ControlsHandles, Props>((props, ref) => {
                 >
                     <div className="video-player__timeline-inner position-relative">
                         <div className="line w-100"/>
-                        <div className="thumb position-absolute"/>
+                        <div className={`thumb position-absolute tr-opacity ${isShowControls ? 'is-active' : ''}`}/>
                     </div>
                 </div>
             </div>
